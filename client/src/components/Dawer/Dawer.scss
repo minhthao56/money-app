@@ -1,0 +1,100 @@
+.bt-bar {
+    display: none;
+    border: none;
+    margin-left: 15px;
+    cursor: pointer;
+    background-color: rgba($color: #000000, $alpha: 0);
+    font-size: 16px;
+    margin-bottom: 4px;
+    transition: all 0.3s;
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.dawer-header {
+    font-family: "Merienda", cursive;
+    color: #1b1e4b;
+    font-size: 20px;
+    img {
+        width: 42px;
+    }
+}
+.dawer-container-profile {
+    display: flex;
+    margin-top: auto;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    .dawr-profile {
+        display: flex;
+        align-items: center;
+    }
+}
+.container-body-dawer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.avatar-dawer {
+    height: 28px;
+    width: 28px;
+    border-radius: 24px;
+    background-position: center;
+    background-size: cover;
+    margin-right: 5px;
+}
+
+.weather-and-signout-dawer {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    .bt-sign-out {
+        margin-top: 10px;
+        border: none;
+        height: 32px;
+        width: 80px;
+        border-radius: 4px;
+        font-weight: 700;
+        color: #d62828;
+        background-color: #ffeaea;
+        transition: all 0.4s;
+        &:hover {
+            background-color: #ffbfbf;
+        }
+    }
+}
+.link-dawer {
+    color: #c4a1fb;
+    display: flex;
+    align-items: center;
+
+    div {
+        border-right: solid;
+        border-width: 1px;
+        margin-right: 5px;
+        padding-right: 5px;
+    }
+}
+// Dark mode
+.dark-header-dawer {
+    color: white;
+}
+#bt-dark-dawer {
+    background-color: #333333;
+    transition: all 0.4s;
+
+    &:hover {
+        background-color: #444444;
+    }
+}
+// Reponsive
+
+@media only screen and (max-width: 768px) {
+    .bt-bar {
+        display: block;
+    }
+}

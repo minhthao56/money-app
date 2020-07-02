@@ -1,0 +1,288 @@
+@import "../../CSSSRecylce/mixin.scss";
+
+.chart-line-home {
+  width: 100%;
+  border: solid;
+  border: {
+    width: 1px;
+    radius: 4px;
+    color: rgba(196, 161, 251, 0.3);
+  }
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 6px -5px rgba(0, 0, 0, 0.75);
+}
+.total-line-chart {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between;
+
+  h3 {
+    margin: 0;
+    font-size: 22px;
+  }
+  span {
+    font-size: 12px;
+    color: rgba(196, 161, 251, 1);
+  }
+  .coin {
+    background-color: rgba(196, 161, 251, 1);
+    font-size: 26px;
+    color: white;
+    height: 46px;
+    width: 46px;
+    border-radius: 43px;
+    @include displayFlex(center, row, center);
+    margin-right: 10px;
+  }
+}
+.total {
+  display: flex;
+  align-items: center;
+}
+//
+.money-total {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+  div {
+    color: rgba(196, 161, 251, 1);
+    margin-left: 7px;
+    margin-right: 7px;
+    height: 24px;
+    width: 24px;
+    border-radius: 100%;
+    background-color: rgb(250, 247, 255);
+    font-size: 12px;
+    @include displayFlex(center, row, center);
+    transform: scale(1);
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    &:hover {
+      background-color: rgb(239, 232, 252);
+      transform: scale(1.2);
+    }
+  }
+  input {
+    border: solid;
+    border: {
+      width: 1px;
+      radius: 3px;
+      color: rgba(196, 161, 251, 0.3);
+    }
+    background-color: white;
+    transition: all 0.3s;
+    &:hover {
+      background-color: rgb(247, 244, 253);
+    }
+    &:focus {
+      outline-color: rgba(196, 161, 251, 1);
+    }
+  }
+  button {
+    color: rgba(196, 161, 251, 1);
+    background-color: rgb(250, 247, 255);
+    border: none;
+    cursor: pointer;
+    height: 26px;
+    width: 26px;
+    margin-left: 2px;
+    border-radius: 3px;
+    font-size: 12px;
+    transform: scale(1);
+    transition: background-color 0.3s, transform 0.3s;
+    &:hover {
+      background-color: rgb(244, 236, 255);
+      transform: scale(1.2);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.display-add-money {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.4s;
+}
+.hidden-add-money {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.4s;
+}
+// Dought chart
+.container-doughnut {
+  @include borderFull(0.3);
+  padding: 10px 20px 10px 20px;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 6px -5px rgba(0, 0, 0, 0.75);
+}
+.main-chart-doughnut {
+  display: grid;
+  grid-template-columns: 25% 65%;
+}
+///@
+.detail-chart-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  span {
+    margin-right: 5px;
+    font-size: 11px;
+    color: #aaaaaa;
+    font-weight: 500;
+  }
+}
+.tb-nomal,
+.bt-color-btom {
+  margin-right: 5px;
+  border: none;
+  background-color: white;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 0.1s;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+.bt-color-btom {
+  border-bottom: solid;
+  height: 56px;
+  color: rgba(196, 161, 251, 1);
+}
+// bi-wallet2
+.conainter-icon-doughnut {
+  display: flex;
+  align-items: center;
+  @include border-bottom(5px, 5px, 0.3);
+  .icon-doughnut {
+    background-color: #4f6ee3;
+    color: white;
+    border-radius: 30px;
+    height: 46px;
+    width: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 6px;
+    .bi-wallet2 {
+      height: 30px;
+      width: 30px;
+    }
+  }
+  .total-exprense-doughnut {
+    display: flex;
+    flex-direction: column;
+    h3 {
+      font-size: 22px;
+      margin: 0;
+    }
+  }
+}
+.main-detail-donghnut {
+  width: 300px;
+  height: 476px;
+  overflow: scroll;
+}
+#title-percent {
+  font-size: 11px;
+  font-weight: 700;
+}
+.header-detail-total-expens {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  div {
+    background-color: rgb(253, 60, 151);
+    color: white;
+    height: 28px;
+    width: 28px;
+    border-radius: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+  }
+  em {
+    font-size: 16px;
+  }
+}
+// Dark chart link
+
+.dark-chark-line {
+  background-color: #141414;
+  border: none;
+}
+#dark-balance {
+  color: white;
+}
+#bt-dart-chart-line {
+  background-color: #141414;
+}
+// Dark chark doughut
+.dark-container-doughnut {
+  background-color: $color-dark;
+  border: none;
+}
+#dark-total-exprense-doughnut {
+  color: white;
+}
+.dark-main-chart-doughnut {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar-track {
+    background-color: $color-dark;
+  }
+}
+#dark-input-add-money {
+  background-color: rgba($color: #333333, $alpha: 1);
+  border-color: #333333;
+  &:hover {
+    background-color: #444444;
+  }
+}
+#dark-fa-plus,
+#dark-fa-paper-plane {
+  background-color: #333333;
+
+  &:hover {
+    background-color: #444444;
+  }
+}
+// Pesponse
+@media only screen and (max-width: 1240px) {
+  .main-detail-donghnut {
+    width: 150px;
+  }
+}
+@media only screen and (max-width: 1170px) {
+  .total-line-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .action-chart-line {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .main-detail-donghnut {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .main-detail-donghnut {
+    width: 150px;
+  }
+}

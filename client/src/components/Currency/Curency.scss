@@ -1,0 +1,79 @@
+@import "../../CSSSRecylce/mixin.scss";
+
+.container-currency {
+  display: flex;
+  @include borderFull(0.3);
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px 20px 10px 20px;
+  background-color: white;
+  box-shadow: 0px 0px 6px -5px rgba(0, 0, 0, 0.75);
+  .header-currency {
+    @include border-bottom(5px, 5px, 0.3);
+    display: flex;
+    align-items: center;
+    h3 {
+      font-size: 18px;
+      margin: 0;
+      color: rgba(27, 29, 78, 1);
+    }
+    span {
+      margin-left: auto;
+      color: #aaaaaa;
+    }
+    .icon-clock {
+      border-right: solid;
+      font-size: 12px;
+      margin-right: 5px;
+      padding-right: 5px;
+      border-width: 1px;
+    }
+    .icon-header-currency {
+      display: flex;
+      align-items: center;
+      .bg-icon-header-currency {
+        background-color: #4f6ee3;
+        height: 26px;
+        width: 26px;
+        border-radius: 100%;
+        margin-right: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      i {
+        color: white;
+        font-size: 14px;
+      }
+    }
+  }
+  .container-main-currency {
+    width: 100%;
+  }
+  .main-currency {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    @include border-bottom(10px, 5px, 0.1);
+
+    b {
+      border-right: solid;
+      margin-right: 5px;
+      padding-right: 5px;
+      border-width: 1px;
+    }
+    img {
+      width: 32px;
+      margin-left: auto;
+    }
+  }
+}
+// dark mode
+
+.dark-currency {
+  background-color: $color-dark;
+  border: none;
+}
+#dart-header-currency {
+  color: white;
+}

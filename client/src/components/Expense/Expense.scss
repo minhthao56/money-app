@@ -1,0 +1,334 @@
+@import "../../CSSSRecylce/mixin.scss";
+
+.container-form-expense {
+  @include flexCenter(flex-start, column);
+  width: 100%;
+  border: solid;
+  border: {
+    width: 1px;
+    radius: 3px;
+    color: #eeeff3;
+  }
+  padding: 10px 20px 10px 20px;
+  background-color: white;
+  box-shadow: 0px 0px 6px -5px rgba(0, 0, 0, 0.75);
+
+  form {
+    width: 100%;
+  }
+  .amount-expense {
+    @include border-bottom(5px, 5px, 0.1);
+    input {
+      font-size: 18px;
+    }
+  }
+  .description-expense {
+    @include border-bottom(5px, 5px, 0.1);
+    input {
+      font-size: 16px;
+      color: $font-color;
+    }
+    i {
+      color: $font-color;
+      margin-right: 5px;
+    }
+  }
+}
+.header-container-category {
+  @include border-bottom(15px, 5px, 0.2);
+  display: flex;
+  width: 100%;
+  font-size: 20px;
+  align-items: center;
+  color: $font-color;
+  font-weight: 700;
+  i {
+    font-size: 25px;
+    border-right: solid;
+    margin-right: 5px;
+    padding-right: 5px;
+    border-width: 1px;
+    border-color: rgba(150, 150, 150, 0.3);
+  }
+}
+.header-expense {
+  display: flex;
+  width: 100%;
+  align-items: center;
+
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: $color-border;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+
+  .icons-header-expense {
+    display: flex;
+    align-items: center;
+    div {
+      background-color: rgb(253, 60, 151);
+      height: 26px;
+      width: 26px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      margin-right: 5px;
+    }
+    i {
+      color: white;
+      font-size: 13px;
+    }
+    h3 {
+      font-size: 18px;
+      margin: 0;
+      color: rgba(27, 29, 78, 1);
+    }
+  }
+}
+.expense {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  input {
+    width: 100%;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+// container-category
+.container-category {
+  @include flexCenter(center, row);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+
+  input {
+    width: initial;
+    opacity: 0;
+  }
+}
+
+.form-category {
+  box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 0.75);
+  background-color: white;
+  @include flexCenter(flex-start, column);
+  width: 400px;
+  padding: 10px 10px 10px 50px;
+  font-size: 14px;
+  border-radius: 4px;
+  label {
+    display: flex;
+    cursor: pointer;
+  }
+}
+.container-category-icon {
+  @include border-bottom(0px, 0px, 0.3);
+  border-top: solid;
+  border-color: rgba(150, 150, 150, 0.3);
+  border-width: 1px;
+  margin-left: 24px;
+  padding-top: 5px;
+}
+.category-icon {
+  margin: 5px 0px 5px 5px;
+  padding: 5px 0px 5px 5px;
+  background-color: white;
+  transition: background-color 0.5s;
+  &:hover {
+    background-color: #eeeeee;
+  }
+}
+.icon {
+  @include flexCenter(center, row);
+  width: 400px;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+  font-size: 13px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+.category-color1 {
+  background-color: $category-color1;
+}
+.category-color2 {
+  background-color: $category-color2;
+}
+.category-color3 {
+  background-color: $category-color3;
+}
+.category-color4 {
+  background-color: $category-color4;
+}
+.category-color5 {
+  background-color: $category-color5;
+}
+
+.header-category {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+  margin: 5px 0px 5px 5px;
+  padding: 5px 0px 5px 5px;
+  width: 300px;
+  background-color: white;
+  transition: background-color 0.5s;
+  &:hover {
+    background-color: #eeeeee;
+  }
+  .icon-header-category {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+}
+.main-category {
+  overflow: scroll;
+  height: 420px;
+}
+// bt-lose-category
+
+.bt-lose-category {
+  display: flex;
+  margin-left: auto;
+  margin-right: 40px;
+  button {
+    height: 32px;
+    width: 100px;
+    border: none;
+    font-weight: 700;
+    background-color: white;
+    color: #d62828;
+    cursor: pointer;
+    transition: background-color 0.5s;
+  }
+  & :hover {
+    background-color: #ffb4b4;
+  }
+}
+/// category-expense
+.category-expense {
+  @include border-bottom(5px, 5px, 0.1);
+  color: #aaaaaa;
+  align-items: center;
+  font-size: 18px;
+  span {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+  .question-circle {
+    font-size: 24px;
+    cursor: pointer;
+  }
+}
+.category-expense-icon {
+  display: flex;
+  span {
+    font-size: 15px;
+    margin-left: -2px;
+  }
+}
+
+.bt-expense {
+  display: flex;
+  button {
+    margin-left: auto;
+    border: none;
+    height: 32px;
+    width: 100px;
+    background-color: white;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: rgba(196, 161, 251, 1);
+    transition: background-color 0.5s, color 0.5s;
+    border-radius: 4px;
+    background-color: #f8ecff;
+    cursor: pointer;
+    &:hover {
+      background-color: #ebcffd;
+      color: rgb(153, 89, 255);
+    }
+  }
+}
+.wallet-expense {
+  font-size: 16px;
+  span {
+    display: flex;
+    width: 100%;
+  }
+  b {
+    margin-left: auto;
+  }
+}
+#description-expense {
+  display: flex;
+  align-items: center;
+  input {
+    padding-left: 5px;
+  }
+  @include border-bottom(5px, 5px, 0.1);
+}
+//// err
+.err-input {
+  font-size: 10px;
+  color: #d62828;
+}
+// dark mode
+.dark-container-form-expense {
+  background-color: $color-dark;
+  border: none;
+}
+#dark-header-expense {
+  color: white;
+}
+#dark-amount-expense {
+  background-color: $color-dark;
+}
+#dark-bt-expense {
+  background-color: rgba(73, 73, 73, 0.3);
+  &:hover {
+    background-color: rgba(150, 150, 150, 0.3);
+  }
+}
+// dark mode category
+.dark-category {
+  background-color: $color-dark;
+}
+.dark-header-category {
+  background-color: $color-dark;
+  &:hover {
+    background-color: rgba(150, 150, 150, 0.3);
+  }
+}
+.dark-main-category {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar-track {
+    background-color: $color-dark;
+  }
+}
+.dark-header-category {
+  color: white;
+}
+.dark-category-icon {
+  background-color: $color-dark;
+  &:hover {
+    background-color: rgba(150, 150, 150, 0.3);
+  }
+}
+#dart-bt-category {
+  background-color: rgba(73, 73, 73, 0.3);
+  &:hover {
+    background-color: rgba(150, 150, 150, 0.3);
+  }
+}

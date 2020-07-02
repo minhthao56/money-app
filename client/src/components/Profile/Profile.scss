@@ -1,0 +1,413 @@
+@import "../../CSSSRecylce/mixin.scss";
+
+#blur-porfile {
+  filter: blur(8px);
+}
+.light-title {
+  padding-top: 74px;
+  margin-left: 70px;
+}
+.container-profile-history {
+  margin-left: 70px;
+  margin-right: 70px;
+  display: flex;
+  height: 100vh;
+  .profile {
+    flex: 1;
+    @include borderFull(0.3);
+    padding: 10px 20px 10px 20px;
+    margin-right: 10px;
+    box-shadow: $box-shadow;
+    height: 390px;
+    .header-profile {
+      display: flex;
+      align-items: center;
+      @include border-bottom(15px, 10px, 0.3);
+      h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+      .user-edit {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-right: solid;
+        padding-right: 5px;
+        margin-right: 5px;
+        border-width: 1px;
+        border-color: #dddddd;
+      }
+    }
+    ///////////////////////////// from
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .container-avatar-profile {
+        display: flex;
+        input {
+          display: none;
+        }
+        .avatar-profile {
+          height: 150px;
+          width: 150px;
+          background-position: center;
+          background-size: cover;
+          border-radius: 150px;
+          margin-bottom: 20px;
+          div {
+            height: 150px;
+            width: 150px;
+            border-radius: 150px;
+            background-color: rgba($color: #333333, $alpha: 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            color: white;
+            transition: background-color 0.5s;
+            &:hover {
+              background-color: rgba($color: #333333, $alpha: 0.9);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .input-profile {
+    margin-bottom: 10px;
+    .container-icon-input {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      div {
+        height: 20px;
+        width: 20px;
+        background-color: $color-card1;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+        font-size: 11px;
+        margin-right: 5px;
+      }
+      span {
+        font-size: 14px;
+        font-weight: 200;
+      }
+      button {
+        border: none;
+        background-color: rgba($color: #000000, $alpha: 0);
+        text-decoration: underline;
+        color: $color-card;
+        cursor: pointer;
+        transition: all 0.2s;
+        &:hover {
+          transform: scale(1.06);
+        }
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    input {
+      width: 70%;
+      height: 32px;
+      @include borderFull(0.8);
+      margin-bottom: 10px;
+      background-color: rgba($color: #000000, $alpha: 0);
+      transition: all 0.3s;
+      &:hover {
+        background-color: #f7f2ff;
+      }
+      &:focus {
+        outline-color: #c4a1fb;
+      }
+    }
+  }
+  #mail-profile {
+    background-color: $color-card2;
+  }
+  #pass-profile {
+    background-color: #4f6ee3;
+  }
+  .bt-profile {
+    display: flex;
+    button {
+      border: none;
+      height: 32px;
+      width: 100px;
+      margin-left: auto;
+      background-color: #f2edfa;
+      color: #c4a1fb;
+      cursor: pointer;
+      border-radius: 3px;
+      font: {
+        weight: 700;
+        size: 15px;
+      }
+      transition: all 0.3s;
+      &:hover {
+        background-color: #ede2ff;
+        transform: scale(1.06);
+      }
+    }
+  }
+
+  /////////////////////////////// history-profile
+  .history-profile {
+    @include borderFull(0.3);
+    flex: 1;
+    margin-left: 20px;
+    box-shadow: $box-shadow;
+    padding: 10px 20px 10px 20px;
+    height: 390px;
+
+    .header-history-profile {
+      @include border-bottom(15px, 10px, 0.3);
+      display: flex;
+      h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+      .icon-credit-card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-right: solid;
+        padding-right: 5px;
+        margin-right: 5px;
+        border-width: 1px;
+        border-color: #dddddd;
+      }
+    }
+    .container-card-wallet {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .card-wallet {
+        height: 200px;
+        width: 350px;
+        padding: 10px;
+        background-color: #4f6ee3;
+        border-radius: 10px;
+        box-shadow: 0px 0px 6px -1px rgba(79, 110, 227, 1);
+        transition: all 0.3s;
+        &:hover {
+          transform: scale(1.03);
+        }
+      }
+    }
+  }
+}
+.plus-income-wallet {
+  border-bottom: solid;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-color: white;
+  border-width: 1px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  button {
+    height: 28px;
+    width: 28px;
+    border: none;
+    border-radius: 36px;
+    color: white;
+    background-color: rgba($color: #ffffff, $alpha: 0.5);
+    font-size: 14px;
+    transition: all 0.2s;
+    margin-right: 5px;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.04);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  input {
+    border: none;
+    border-radius: 5px;
+    background-color: rgba($color: #ffffff, $alpha: 0.5);
+    width: 88px;
+    transition: width linear 0.4s;
+    padding-left: 5px;
+    color: white;
+    &:hover {
+      width: 200px;
+    }
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: white;
+      padding-left: 5px;
+    }
+  }
+}
+.money-wallet {
+  color: white;
+  display: flex;
+  margin-bottom: 10px;
+  div {
+    height: 22px;
+    width: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid;
+    border-radius: 24px;
+    border-width: 1px;
+    margin-right: 5px;
+    font-size: 10px;
+  }
+  span {
+    font-weight: 500;
+    font-size: 13px;
+  }
+}
+.balance-wallet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  div {
+    height: 35px;
+    width: 35px;
+    border: solid;
+    border: {
+      width: 1px;
+      radius: 30px;
+      color: #ffffff;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+  }
+  span {
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+  }
+}
+// History income
+.container-history-income {
+  display: flex;
+  padding: 6px;
+  background-color: rgba($color: #000000, $alpha: 0);
+  border-radius: 5px;
+  @include border-bottom(5px, 5px, 0.3);
+  .icon-income-wallet {
+    background-color: #4f6ee3;
+    color: white;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    margin-right: 5px;
+  }
+}
+.header-history-income {
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.full-container-history-income {
+  height: 75px;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+// Dark mode
+.dark-full-container-profile {
+  background-color: #000000;
+  color: white;
+}
+.dark-full-container-history-income {
+  &::-webkit-scrollbar-track {
+    background-color: $color-dark;
+  }
+}
+#dark-title {
+  color: white;
+}
+.dark-title {
+  color: white;
+}
+#dark-profile {
+  background-color: $color-dark;
+  border: none;
+}
+#dark-bt-profile {
+  background-color: #333333;
+  transition: all 0.3s;
+  &:hover {
+    background-color: #444444;
+  }
+}
+#dark-input {
+  &:hover {
+    background-color: #222222;
+  }
+}
+// Responsive
+@media only screen and (max-width: 992px) {
+  .container-profile-history {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+  .light-title {
+    margin-left: 40px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .container-profile-history {
+    margin-left: 20px;
+    margin-right: 20px;
+    .history-profile {
+      margin-left: 10px;
+    }
+  }
+  .light-title {
+    margin-left: 20px;
+  }
+}
+@media only screen and (max-width: 850px) {
+  .container-profile-history {
+    margin-left: 20px;
+    margin-right: 20px;
+    flex-direction: column-reverse;
+    margin-top: 150px;
+    .history-profile {
+      margin: 0;
+      margin-bottom: 20px;
+    }
+    .profile {
+      margin: 0;
+    }
+  }
+  .light-title {
+    margin-left: 20px;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .container-profile-history {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 140px;
+    .history-profile {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+  }
+}

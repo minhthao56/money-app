@@ -1,0 +1,59 @@
+@mixin flexCenter($align, $direction) {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: $align;
+  flex-direction: $direction;
+}
+@mixin displayFlex($align, $direction, $justify) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+@mixin border-bottom($m-bottom, $p-bottom, $opacity) {
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: rgba(200, 200, 200, $opacity);
+  margin-bottom: $m-bottom;
+  padding-bottom: $p-bottom;
+}
+@mixin borderFull($opacity) {
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(196, 161, 251, $opacity);
+  border-radius: 4px;
+}
+
+$box-shadow: 0px 0px 6px -5px rgba(0, 0, 0, 0.75);
+
+// color
+$font-color: #555;
+
+$color-border: rgba(150, 150, 150, 0.3);
+
+$category-color1: #ffbe0b;
+$category-color2: #fb5607;
+$category-color3: #ff006e;
+$category-color4: #8338ec;
+$category-color5: #3a86ff;
+
+$main-coler: rgba(196, 161, 251, 1);
+
+$color-dark: #141414;
+
+$color-card: #c4a1fb;
+$color-card1: rgb(253, 60, 151);
+$color-card2: rgb(27, 203, 183);
+$color-card3: #4f6ee3;
+
+$choose-color1: #003049;
+$choose-color2: #d62828;
+$choose-color3: #f77f00;
+$choose-color4: #fcbf49;
+$choose-color5: #eae2b7;
+$choose-color6: #05668d;
+$choose-color7: #00a896;
+$choose-color8: #00a896;
+$choose-color9: #02c39a;
+$choose-color10: #f0f3bd;

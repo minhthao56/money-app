@@ -1,0 +1,178 @@
+@import "../../CSSSRecylce/mixin.scss";
+
+.container-choose {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  flex-direction: column;
+  background-color: rgba($color: #000000, $alpha: 0.6);
+  .main-choose {
+    background-color: white;
+    position: absolute;
+    height: 510px;
+    width: 350px;
+    border-radius: 4px;
+    padding: 10px;
+    .form-choose {
+      height: 410px;
+      overflow: scroll;
+      overflow-x: hidden;
+    }
+  }
+  .header-choose-currency {
+    display: flex;
+    @include border-bottom(5px, 10px, 0.3);
+    font-size: 16px;
+    align-items: center;
+    h3 {
+      margin: 0;
+    }
+    div {
+      background-color: $color-card3;
+      height: 32px;
+      width: 32px;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      margin-right: 5px;
+      font-size: 14px;
+    }
+  }
+}
+.main-currency-choose {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: rgba($color: #000000, $alpha: 0);
+  transition: background-color 0.5s;
+  &:hover {
+    background-color: #eeeeee;
+  }
+  div {
+    height: 30px;
+    width: 30px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-right: 10px;
+    font-size: 15px;
+    border-width: 500;
+  }
+  b {
+    border-right: solid;
+    padding-right: 5px;
+    margin-right: 5px;
+    border-width: 1px;
+  }
+}
+.icon-sign-currency1 {
+  background-color: $choose-color1;
+}
+.icon-sign-currency2 {
+  background-color: $choose-color2;
+}
+
+.icon-sign-currency3 {
+  background-color: $choose-color3;
+}
+
+.icon-sign-currency4 {
+  background-color: $choose-color4;
+}
+.icon-sign-currency5 {
+  background-color: $choose-color5;
+}
+.icon-sign-currency6 {
+  background-color: $choose-color6;
+}
+.icon-sign-currency7 {
+  background-color: $choose-color7;
+}
+
+.icon-sign-currency8 {
+  background-color: $choose-color8;
+}
+
+.icon-sign-currency9 {
+  background-color: $choose-color9;
+}
+.icon-sign-currency10 {
+  background-color: $choose-color10;
+}
+// action-choose
+
+.action-choose {
+  display: flex;
+  justify-content: flex-end;
+  button {
+    border: none;
+    height: 30px;
+    margin-right: 5px;
+    width: 100px;
+    border-radius: 4px;
+    color: $main-coler;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 13px;
+    background-color: #f5eeff;
+    &:hover {
+      background-color: #ece0fc;
+      transform: scale(1.04);
+    }
+  }
+  .lose-choose {
+    color: $choose-color2;
+    background-color: #fadfdf;
+    transition: all 0.3s;
+    font-weight: 600;
+    &:hover {
+      background-color: #ffbfbf;
+      transform: scale(1.04);
+    }
+  }
+}
+
+/// dark
+#dark-main-choose {
+  background-color: $color-dark;
+  color: white;
+}
+#your-currency {
+  color: white;
+}
+#dark-main-currency {
+  &:hover {
+    background-color: #333333;
+  }
+}
+.dark-action-choos {
+  button {
+    &:hover {
+      background-color: #333333;
+    }
+  }
+}
+.dark-action-choose {
+  button,
+  .darklose-choose {
+    background-color: #333333;
+    &:hover {
+      background-color: #444444;
+    }
+  }
+}
+#dark-form-choose {
+  &::-webkit-scrollbar-track {
+    background-color: $color-dark;
+  }
+}

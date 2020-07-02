@@ -1,0 +1,80 @@
+@import "../../CSSSRecylce/mixin.scss";
+
+.container-card-expendse {
+  @include borderFull(0.3);
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+  background-color: white;
+  box-shadow: 0px 0px 6px -5px rgba(0, 0, 0, 0.75);
+  .icon-hearder-card-expense {
+    display: flex;
+    align-items: center;
+    @include border-bottom(5px, 5px, 0.3);
+    h3 {
+      font-size: 18px;
+      margin: 0;
+      color: rgba(27, 29, 78, 1);
+    }
+    div {
+      background-color: rgb(27, 203, 183);
+      height: 26px;
+      width: 26px;
+      border-radius: 100%;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 5px;
+    }
+  }
+  .time-expense {
+    @include border-bottom(5px, 5px, 0.2);
+    display: flex;
+    align-items: center;
+  }
+  .main-time-expense {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    #date-main {
+      font-size: 26px;
+      font-weight: 400;
+      margin-right: 10px;
+    }
+    .sub-time {
+      display: flex;
+      flex-direction: column;
+    }
+    #calendar-expense {
+      font-size: 11px;
+      font-style: italic;
+    }
+  }
+}
+.container-price-card {
+  display: flex;
+  align-items: center;
+  .icon-card-expense {
+    flex: 1;
+  }
+}
+.main-container-time-expense {
+  height: 500px;
+  overflow: scroll;
+}
+// dark mode
+.dark-card-expendse {
+  background-color: $color-dark;
+  border: none;
+}
+#History {
+  color: white;
+}
+.dark-main-container-time-expense {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &::-webkit-scrollbar-track {
+    background-color: $color-dark;
+  }
+}

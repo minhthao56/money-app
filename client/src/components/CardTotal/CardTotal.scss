@@ -1,0 +1,65 @@
+@import "../../CSSSRecylce/mixin.scss";
+
+.container-card-total {
+  @include borderFull(0);
+  padding: 10px 20px 10px 20px;
+  transform: scale(1);
+  transition: transform 0.2s;
+  color: white;
+  background-color: #c4a1fb;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 0px 6px -1px rgba(196, 161, 251, 1);
+  h3 {
+    color: white;
+  }
+  .main-card-total {
+    display: flex;
+    align-items: center;
+    .money-card-total {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+    .money-card-total {
+      font-size: 15px;
+    }
+  }
+  &:hover {
+    transform: scale(1.06);
+  }
+}
+.money-sub-card {
+  padding: 5px 10px 5px 10px;
+  border-radius: 20px;
+  margin-top: 5px;
+  color: white;
+  border: solid;
+  border-width: 1px;
+  border-color: white;
+}
+.icon-card-total {
+  margin-right: auto;
+  color: white;
+  height: 34px;
+  width: 34px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  border: solid;
+  border-width: 1px;
+  border-color: white;
+}
+////
+.card-week {
+  background-color: rgb(253, 60, 151);
+  box-shadow: 0px 0px 6px -1px rgb(253, 60, 151);
+}
+.card-month {
+  background-color: rgb(27, 203, 183);
+  box-shadow: 0px 0px 6px -1px rgb(27, 203, 183);
+}
