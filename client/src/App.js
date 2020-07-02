@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
@@ -17,6 +22,7 @@ export default function App() {
   const [dataChartBar, setDataChartBar] = useState([]);
   const [dataIcome, setDataIncome] = useState([]);
   const [isLoseCurrency, setIsLoseCurrency] = useState(false);
+  const [isLogOut, setIsLogOut] = useState(false);
 
   const [blurHome, setBlurHome] = useState(false);
 
@@ -44,7 +50,10 @@ export default function App() {
         fetchDataIncome(res.data._id);
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.status === 401) {
+          localStorage.removeItem("token");
+          setIsLogOut(true);
+        }
       });
   };
   // balance
@@ -160,6 +169,7 @@ export default function App() {
         {isLoseCurrency ? (
           <ChooseCurrency handleLoseChooseCurrency={handleLoseChooseCurrency} />
         ) : null}
+        {isLogOut ? <Redirect to="/user/login" /> : null}
         <Switch>
           <Route exact path={`/`}>
             <Home

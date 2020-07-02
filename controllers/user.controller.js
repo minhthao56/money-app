@@ -14,11 +14,11 @@ sgMail.setApiKey(
 cloudinary.config({
   cloud_name: "du4arxzzj",
   api_key: "821499727673838",
-  api_secret: "hDcEoltxpFdpSkkBeffwV7-Rqso"
+  api_secret: "hDcEoltxpFdpSkkBeffwV7-Rqso",
 });
 
 //Create User
-module.exports.createUser = async function(req, res) {
+module.exports.createUser = async function (req, res) {
   const email = req.body.email;
   const user = await Users.findOne({ email: email });
   if (user) {
@@ -34,7 +34,7 @@ module.exports.createUser = async function(req, res) {
     const addMoney = {
       idUser: idUser,
       income: [],
-      expense: []
+      expense: [],
     };
     const a = await Finances.insertMany(addMoney);
     console.log(a);
@@ -44,7 +44,7 @@ module.exports.createUser = async function(req, res) {
 };
 
 //Loign
-module.exports.login = async function(req, res) {
+module.exports.login = async function (req, res) {
   const email = req.body.email;
   const password = req.body.password;
   const user = await Users.findOne({ email: email });
@@ -60,31 +60,30 @@ module.exports.login = async function(req, res) {
       name: user.name,
       email: user.email,
       avatarUrl: user.avatarUrl,
-      token: token
+      token: token,
     };
     res.json(newuser);
   }
 };
 
 // Check logged
-module.exports.checkLoggedIn = async function(req, res) {
+module.exports.checkLoggedIn = async function (req, res) {
   const token = req.body.token;
-
-  if (!token) {
-    return;
+  if (token === null) {
+    res.status(401).json({ msg: "No Token" });
+  } else {
+    const verified = jwt.verify(token, TOKEN_SECRET);
+    const user = await Users.findOne({ _id: verified._id });
+    res.json(user);
   }
-  const verified = jwt.verify(token, TOKEN_SECRET);
-  const user = await Users.findOne({ _id: verified._id });
-
-  res.json(user);
 };
 // Update inform user
-module.exports.updateInfoUser = async function(req, res) {
+module.exports.updateInfoUser = async function (req, res) {
   const body = req.body;
 
   if (req.file !== undefined) {
     const path = req.file.path;
-    let result = await cloudinary.uploader.upload(path, function(
+    let result = await cloudinary.uploader.upload(path, function (
       error,
       result
     ) {
@@ -94,7 +93,7 @@ module.exports.updateInfoUser = async function(req, res) {
     await Users.findByIdAndUpdate(
       { _id: body._id },
       {
-        $set: { avatarUrl: avatarUrl }
+        $set: { avatarUrl: avatarUrl },
       }
     );
   }
@@ -103,7 +102,7 @@ module.exports.updateInfoUser = async function(req, res) {
     await Users.findByIdAndUpdate(
       { _id: body._id },
       {
-        $set: { name: name }
+        $set: { name: name },
       }
     );
   }
@@ -112,7 +111,7 @@ module.exports.updateInfoUser = async function(req, res) {
     await Users.findByIdAndUpdate(
       { _id: body._id },
       {
-        $set: { email: email }
+        $set: { email: email },
       }
     );
   }
@@ -122,7 +121,7 @@ module.exports.updateInfoUser = async function(req, res) {
     await Users.findByIdAndUpdate(
       { _id: body._id },
       {
-        $set: { password: password }
+        $set: { password: password },
       }
     );
   }
@@ -130,18 +129,18 @@ module.exports.updateInfoUser = async function(req, res) {
   res.json(body);
 };
 
-module.exports.addCurrencyDefault = async function(req, res) {
+module.exports.addCurrencyDefault = async function (req, res) {
   const body = req.body;
   const User = await Users.findOneAndUpdate(
     { _id: body.idUser },
     {
-      $set: { defaultCurrency: body.sign }
+      $set: { defaultCurrency: body.sign },
     }
   );
   res.json(User);
 };
 // Forget password
-module.exports.fogotPass = async function(req, res) {
+module.exports.fogotPass = async function (req, res) {
   const email = req.body.email;
 
   const pass = shortid.generate();
@@ -151,12 +150,12 @@ module.exports.fogotPass = async function(req, res) {
     from: "minhthao1111@outlook.com",
     subject: "New Password",
     text: "You should check your accout and change your password right now.",
-    html: "New your passwor is " + pass
+    html: "New your passwor is " + pass,
   };
 
   await Users.findOneAndUpdate(
     {
-      email: email
+      email: email,
     },
     { $set: { password: password } }
   );
