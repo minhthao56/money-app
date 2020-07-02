@@ -37,8 +37,6 @@ export default function Expense(props) {
   const url = "https://fsklf.sse.codesandbox.io/";
   const regex = new RegExp("^[0-9]+$");
 
-  // Open and close category
-
   // value amount
   const hanldeValueAmount = (e) => {
     const value = e.target.value;
