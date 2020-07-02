@@ -22,7 +22,7 @@ export default function App() {
 
   const dispatch = useDispatch();
 
-  const url = "https://pks85.sse.codesandbox.io/";
+  const url = "http://localhost:8080/";
   const token = localStorage.getItem("token");
 
   //  check login

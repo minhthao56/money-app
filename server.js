@@ -20,7 +20,7 @@ const uri =
   "mongodb+srv://minhthao56:minhthao56@cluster0-dfzmq.gcp.mongodb.net/financeApp?retryWrites=true&w=majority";
 const url2 =
   "mongodb://minhthao56:minhthao56@ds125060.mlab.com:25060/heroku_lc77pdj0";
-mongoose.connect(uri || url2, {
+mongoose.connect(url2, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false,
