@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Moment from "react-moment";
 
 import "./Curency.scss";
 
 import VN from "../../images/vietnam.png";
-import US from "../../images/united states.png";
+import EU from "../../images/world.png";
 import JP from "../../images/japan.png";
 
 export default function Currency() {
   const [dataCurrency, setDataCurrency] = useState(0);
-  const [timeCurrency, setTimeCurrency] = useState("");
   const DarkMode = useSelector((state) => state.DarkMode);
   const fetchDataCurrency = async () => {
     const res = await axios.get(
-      "http://data.fixer.io/api/latest?access_key=e3aa50ac698a6df4b1daf305b103764c"
+      "https://openexchangerates.org/api/latest.json?app_id=8c8f0dfb556a43b9bbfced404737f02a"
     );
     setDataCurrency(res.data.rates);
-    setTimeCurrency(res.data.date);
   };
   useEffect(() => {
     fetchDataCurrency();
   }, []);
 
   const VND = dataCurrency.VND && dataCurrency.VND.toFixed(1);
-  const USD = dataCurrency.USD && dataCurrency.USD.toFixed(1);
+  const EUR = dataCurrency.EUR && dataCurrency.EUR.toFixed(1);
   const JPY = dataCurrency.JPY && dataCurrency.JPY.toFixed(1);
+  const time = new Date();
 
   return (
     <div
@@ -43,7 +43,8 @@ export default function Currency() {
           </div>
 
           <span>
-            <i className="fas fa-clock icon-clock"></i> {timeCurrency}
+            <i className="fas fa-clock icon-clock"></i>{" "}
+            <Moment format="DD/MM/YYYY">{time}</Moment>
           </span>
         </div>
 
@@ -51,21 +52,21 @@ export default function Currency() {
           <span>
             <b>VND</b>{" "}
           </span>
-          <span style={{ color: "#aaaaaa" }}>1 EUR = {VND} ₫</span>
+          <span style={{ color: "#aaaaaa" }}>1 USD = {VND} ₫</span>
           <img src={VN} alt="" />
         </div>
         <div className="main-currency">
           <span>
-            <b>USD</b>
+            <b>EUR</b>
           </span>
-          <span style={{ color: "#aaaaaa" }}>1 EUR = {USD} $</span>
-          <img src={US} alt="" />
+          <span style={{ color: "#aaaaaa" }}>1 USD = {EUR} €</span>
+          <img src={EU} alt="" />
         </div>
         <div className="main-currency">
           <span>
             <b>JPY</b>{" "}
           </span>
-          <span style={{ color: "#aaaaaa" }}>1 EUR = {JPY} ¥</span>
+          <span style={{ color: "#aaaaaa" }}>1 USD = {JPY} ¥</span>
           <img src={JP} alt="" />
         </div>
       </div>

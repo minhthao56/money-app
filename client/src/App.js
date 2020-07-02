@@ -173,6 +173,7 @@ export default function App() {
               fetchDataChartLine={fetchDataChartLine}
               checkLogined={checkLogined}
               blurHome={blurHome}
+              fetchDataChartBar={fetchDataChartBar}
             />
           </Route>
 

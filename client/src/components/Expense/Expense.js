@@ -32,6 +32,7 @@ export default function Expense(props) {
     fetchDataChartDoughnut,
     fetchDataFetchExpense,
     hanleOpenCategory,
+    fetchDataChartBar,
   } = props;
   const url = "http://localhost:8080/";
   const regex = new RegExp("^[0-9]+$");
@@ -92,6 +93,9 @@ export default function Expense(props) {
         })
         .then(() => {
           return fetchDataFetchExpense();
+        })
+        .then(() => {
+          return fetchDataChartBar();
         })
         .catch((err) => {
           console.log(err);

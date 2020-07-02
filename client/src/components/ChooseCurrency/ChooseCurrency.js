@@ -29,15 +29,12 @@ export default function ChooseCurrency(props) {
     setValueChoose(value);
   };
   const handleSubmitChooseCurrency = (event) => {
-    console.log("run currency");
-
     event.preventDefault();
     const currencyInfo = {
       idUser: CheckLogin.data._id,
       sign: valueChoose,
     };
     axios.post(url + "users/currency", currencyInfo).then((res) => {
-      console.log("res currency");
       return handleLoseChooseCurrency();
     });
   };

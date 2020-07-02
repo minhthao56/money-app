@@ -34,6 +34,7 @@ export default function Home(props) {
     fetchDataChartLine,
     checkLogined,
     blurHome,
+    fetchDataChartBar,
   } = props;
   const hanleOpenCategory = () => {
     setExpanded(!expanded);
@@ -85,6 +86,7 @@ export default function Home(props) {
                 fetchDataChartDoughnut={fetchDataChartDoughnut}
                 fetchDataChartLine={fetchDataChartLine}
                 hanleOpenCategory={hanleOpenCategory}
+                fetchDataChartBar={fetchDataChartBar}
               />
 
               <CardEpense dataExpense={dataExpense} />
