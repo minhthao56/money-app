@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 const userRouter = require("./routers/users.router");
 const financeRouter = require("./routers/finance.router");
@@ -35,6 +36,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
 }
 // Cookie
 app.use(cookieParser());
