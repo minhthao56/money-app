@@ -32,7 +32,8 @@ connection.once("open", () => {
 // Request body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-if (process.env.NOVE_ENV === "production") {
+
+if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 // Cookie
