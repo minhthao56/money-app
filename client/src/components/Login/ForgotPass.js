@@ -8,7 +8,7 @@ export default function ForgotPass(props) {
 
   const { handleCloseForgotPass } = props;
   const dark = JSON.parse(localStorage.getItem("dark"));
-  const url = "http://localhost:8080/";
+  const url = "https://fsklf.sse.codesandbox.io/";
 
   // handle Value Email
   const handleValueEmail = (event) => {

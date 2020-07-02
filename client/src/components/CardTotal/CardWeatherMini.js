@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
-import { useDispatch } from "react-redux";
 
 import "./CardWeatherMini.scss";
 import "../../weather-icons/css/weather-icons.min.css";

@@ -34,7 +34,7 @@ export default function Expense(props) {
     hanleOpenCategory,
     fetchDataChartBar,
   } = props;
-  const url = "http://localhost:8080/";
+  const url = "https://fsklf.sse.codesandbox.io/";
   const regex = new RegExp("^[0-9]+$");
 
   // Open and close category

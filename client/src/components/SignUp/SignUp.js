@@ -25,7 +25,7 @@ export default function User() {
   const [isErrCreateUser, setIsErrCreateUser] = useState(false);
 
   const DarkMode = JSON.parse(localStorage.getItem("dark"));
-  const url = "http://localhost:8080/";
+  const url = "https://fsklf.sse.codesandbox.io/";
   let history = useHistory();
 
   const validationEmail = new RegExp(

@@ -21,7 +21,7 @@ export default function Profile(props) {
   const Blur = useSelector((state) => state.Blur);
 
   const { dataIcome, checkLogined } = props;
-  const url = "http://localhost:8080/";
+  const url = "https://fsklf.sse.codesandbox.io/";
   const DarkMode = useSelector((state) => state.DarkMode);
 
   const handleChangeInfo = (num) => {
