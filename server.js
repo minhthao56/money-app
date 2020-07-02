@@ -32,6 +32,9 @@ connection.once("open", () => {
 // Request body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+if (process.env.NOVE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 // Cookie
 app.use(cookieParser());
 // End  point
