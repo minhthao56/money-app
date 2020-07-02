@@ -143,6 +143,7 @@ export default function App() {
   };
   const handleLoseChooseCurrency = () => {
     setIsLoseCurrency(false);
+    setBlurHome(false);
   };
   const handleLoseChooseCurrencyByData = (data) => {
     if (data.defaultCurrency === undefined) {

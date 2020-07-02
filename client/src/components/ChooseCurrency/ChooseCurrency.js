@@ -82,14 +82,6 @@ export default function ChooseCurrency(props) {
             }
           >
             <button type="submit">CHOOSE</button>
-            <button
-              type="button"
-              className={
-                DarkMode ? "lose-choose darklose-choose" : "lose-choose"
-              }
-            >
-              LOSE
-            </button>
           </div>
         </form>
       </div>
