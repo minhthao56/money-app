@@ -149,8 +149,8 @@ export default function ChartDoughnut(props) {
             legend: {
               display: false,
             },
-            aspectRatio: 1,
           }}
+          id="doughnut-cavant"
         />
       </div>
     </div>

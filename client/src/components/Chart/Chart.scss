@@ -123,6 +123,9 @@
   display: grid;
   grid-template-columns: 25% 65%;
 }
+#doughnut-cavant {
+  transform: rotate(270deg);
+}
 ///@
 .detail-chart-line {
   display: flex;
@@ -162,6 +165,7 @@
 .conainter-icon-doughnut {
   display: flex;
   align-items: center;
+
   @include border-bottom(5px, 5px, 0.3);
   .icon-doughnut {
     background-color: #4f6ee3;
@@ -228,6 +232,7 @@
 #bt-dart-chart-line {
   background-color: #141414;
 }
+
 // Dark chark doughut
 .dark-container-doughnut {
   background-color: $color-dark;
