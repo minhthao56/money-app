@@ -387,7 +387,8 @@
     margin-left: 20px;
     margin-right: 20px;
     flex-direction: column-reverse;
-    margin-top: 150px;
+    margin-top: 140px;
+
     .history-profile {
       margin: 0;
       margin-bottom: 20px;
@@ -404,7 +405,19 @@
   .container-profile-history {
     margin-left: 10px;
     margin-right: 10px;
-    margin-top: 140px;
+
+    .history-profile {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+  }
+}
+@media only screen and (max-width: 490px) {
+  .container-profile-history {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+
     .history-profile {
       margin: 0;
       margin-bottom: 10px;
