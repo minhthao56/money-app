@@ -24,7 +24,7 @@ export default function Expense(props) {
   const dispatch = useDispatch();
 
   const now = new Date();
-  const [selectedDate, SetSelectedDate] = useState(now);
+  const [selectedDate, handleDateChange] = useState(now);
 
   const {
     fetchDataBalance,
@@ -47,19 +47,15 @@ export default function Expense(props) {
     const value = e.target.value;
     setValuaDes(value);
   };
-  // value Date
-  const handleDateChange = (event) => {
-    const value = event.target.value;
-    SetSelectedDate(value);
-  };
+
   // handle Submit Expense
   const handleSubmitExpense = (event) => {
     event.preventDefault();
-
+    let timeSelect = new Date(selectedDate);
     const inFoExpense = {
       des: valuaDes,
       amount: valueAmount,
-      time: selectedDate,
+      time: timeSelect,
       title: Category[0],
       color: Category[1],
       className: Category[2],
@@ -209,7 +205,6 @@ export default function Expense(props) {
               variant="inline"
               value={selectedDate}
               onChange={handleDateChange}
-              onError={console.log}
               format="MM/DD/YYYY, h:mm:ss a"
               style={{ width: "100%" }}
               required

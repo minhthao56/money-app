@@ -79,12 +79,14 @@ export default function Nav(props) {
     >
       <div className="container-nav ">
         <div className="logo-signup logo-nav">
-          <img
-            src={darkMode ? LogoForDarkMode : ImageFinance}
-            id="logo-nav"
-            alt=""
-          />
-          <h1 className={darkMode ? "dart-logo-dark" : null}>money</h1>
+          <Link style={{ display: "flex" }} to="/">
+            <img
+              src={darkMode ? LogoForDarkMode : ImageFinance}
+              id="logo-nav"
+              alt=""
+            />
+            <h1 className={darkMode ? "dart-logo-dark" : null}>money</h1>
+          </Link>
         </div>
 
         <div className="container-link-nav">

@@ -113,14 +113,14 @@ export default function LineChart(props) {
           <div className="coin">
             <i className="fas fa-coins"></i>
           </div>
-          <div>
+          <div className="container-balance">
             <em>Your Balance</em>
             <div className="money-total">
               <h3 id={DarkMode ? "dark-balance" : null}>
-                {" "}
-                {CheckLogin.data && CheckLogin.data.defaultCurrency}{" "}
+                {CheckLogin.data && CheckLogin.data.defaultCurrency}
                 {Balance[2]}
               </h3>
+
               <div
                 onClick={handleShowAddMoney}
                 id={DarkMode ? "dark-fa-plus" : null}

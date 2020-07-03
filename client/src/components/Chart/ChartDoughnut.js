@@ -113,7 +113,7 @@ export default function ChartDoughnut(props) {
             <div>
               <i className="fas fa-list"></i>
             </div>
-            <em>Detail expense</em>
+            <em>Detail</em>
           </div>
           <div
             className={

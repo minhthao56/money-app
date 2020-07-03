@@ -46,6 +46,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 2px;
+
   div {
     color: rgba(196, 161, 251, 1);
     margin-left: 7px;
@@ -104,13 +105,14 @@
 .display-add-money {
   visibility: visible;
   opacity: 1;
-  transition: all 0.4s;
+  transition: opacity linear 0.3s;
 }
 .hidden-add-money {
   visibility: hidden;
   opacity: 0;
-  transition: all 0.4s;
+  transition: opacity linear 0.3s;
 }
+
 // Dought chart
 .container-doughnut {
   @include borderFull(0.3);
@@ -126,7 +128,7 @@
 #doughnut-cavant {
   transform: rotate(270deg);
 }
-///@
+/// detail
 .detail-chart-line {
   display: flex;
   align-items: center;
@@ -161,7 +163,7 @@
   height: 56px;
   color: rgba(196, 161, 251, 1);
 }
-// bi-wallet2
+// bt-wallet2
 .conainter-icon-doughnut {
   display: flex;
   align-items: center;
@@ -205,6 +207,7 @@
   align-items: center;
   margin-bottom: 10px;
   margin-top: 5px;
+  @include border-bottom(5px, 5px, 0.3);
   div {
     background-color: rgb(253, 60, 151);
     color: white;
@@ -217,7 +220,8 @@
     margin-right: 5px;
   }
   em {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
   }
 }
 // Dark chart link
@@ -289,5 +293,12 @@
 @media only screen and (max-width: 768px) {
   .main-detail-donghnut {
     width: 150px;
+  }
+}
+@media only screen and (max-width: 490px) {
+  .money-total {
+    input {
+      width: 80px;
+    }
   }
 }
