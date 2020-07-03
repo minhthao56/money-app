@@ -5,27 +5,24 @@
 }
 .light-title {
   padding-top: 74px;
-  margin-left: 70px;
+}
+.full-container-profile {
+  padding-left: 70px;
+  padding-right: 70px;
+  padding-bottom: 200px;
 }
 .container-profile-history {
-  margin-left: 70px;
-  margin-right: 70px;
-  display: flex;
-  height: 100vh;
   .profile {
-    flex: 1;
     @include borderFull(0.3);
     padding: 10px 20px 10px 20px;
-    margin-right: 10px;
     box-shadow: $box-shadow;
     height: 390px;
     .header-profile {
       display: flex;
       align-items: center;
       @include border-bottom(15px, 10px, 0.3);
-      h3 {
+      h2 {
         margin: 0;
-        font-size: 18px;
       }
       .user-edit {
         display: flex;
@@ -160,8 +157,6 @@
   /////////////////////////////// history-profile
   .history-profile {
     @include borderFull(0.3);
-    flex: 1;
-    margin-left: 20px;
     box-shadow: $box-shadow;
     padding: 10px 20px 10px 20px;
     height: 390px;
@@ -361,66 +356,20 @@
 }
 // Responsive
 @media only screen and (max-width: 992px) {
-  .container-profile-history {
-    margin-left: 40px;
-    margin-right: 40px;
-  }
-  .light-title {
-    margin-left: 40px;
+  .full-container-profile {
+    padding-left: 40px;
+    padding-right: 40px;
   }
 }
-
-@media only screen and (max-width: 900px) {
-  .container-profile-history {
-    margin-left: 20px;
-    margin-right: 20px;
-    .history-profile {
-      margin-left: 10px;
-    }
-  }
-  .light-title {
-    margin-left: 20px;
-  }
-}
-@media only screen and (max-width: 850px) {
-  .container-profile-history {
-    margin-left: 20px;
-    margin-right: 20px;
-    flex-direction: column-reverse;
-    margin-top: 140px;
-
-    .history-profile {
-      margin: 0;
-      margin-bottom: 20px;
-    }
-    .profile {
-      margin: 0;
-    }
-  }
-  .light-title {
-    margin-left: 20px;
+@media only screen and (max-width: 768px) {
+  .full-container-profile {
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 @media only screen and (max-width: 576px) {
-  .container-profile-history {
-    margin-left: 10px;
-    margin-right: 10px;
-
-    .history-profile {
-      margin: 0;
-      margin-bottom: 10px;
-    }
-  }
-}
-@media only screen and (max-width: 490px) {
-  .container-profile-history {
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 20px;
-
-    .history-profile {
-      margin: 0;
-      margin-bottom: 10px;
-    }
+  .full-container-profile {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
