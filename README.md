@@ -35,7 +35,7 @@ Recommend run FE on `heroku` or local !!!
 
 1. After sign and login on first time. You must choose your sign currency
 
-![alt](https://res.cloudinary.com/du4arxzzj/image/upload/v1593766849/Screenshot_103_q3d9jz.png)
+![alt](https://res.cloudinary.com/du4arxzzj/image/upload/v1593768533/Screenshot_108_zatstk.png)
 
 2. The second, inputing your income you have
 
