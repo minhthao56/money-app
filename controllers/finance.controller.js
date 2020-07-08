@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 let dayNow = require("../FunctionGetDayOfWeek/FunctionGetDayOfWeek");
 
 // income
-module.exports.Income = async function(req, res) {
+module.exports.Income = async function (req, res) {
   const body = req.body;
   const _id = mongoose.Types.ObjectId();
   const time = new Date();
@@ -12,20 +12,20 @@ module.exports.Income = async function(req, res) {
   const income = {
     _id: _id,
     time: time,
-    amount: amount
+    amount: amount,
   };
 
   await Finances.findOneAndUpdate(
     { idUser: body.idUser },
     {
-      $addToSet: { income: income }
+      $addToSet: { income: income },
     },
     { upsert: true, new: true, runValidators: true }
   );
   res.json(income);
 };
 // expense
-module.exports.Expense = async function(req, res) {
+module.exports.Expense = async function (req, res) {
   const body = req.body;
   const idUser = body.idUser;
   const _id = mongoose.Types.ObjectId();
@@ -37,17 +37,17 @@ module.exports.Expense = async function(req, res) {
     color: body.color,
     className: body.className,
     amount: amount,
-    des: body.des
+    des: body.des,
   };
   const expense = await Finances.findOneAndUpdate(
     { idUser: idUser },
     {
-      $addToSet: { expense: inFoExpense }
+      $addToSet: { expense: inFoExpense },
     },
     {
       upsert: true,
       new: true,
-      runValidators: true
+      runValidators: true,
     }
   );
 
@@ -55,7 +55,7 @@ module.exports.Expense = async function(req, res) {
 };
 // get balance
 
-module.exports.Balance = async function(req, res) {
+module.exports.Balance = async function (req, res) {
   const id = req.params.id;
   const now = new Date();
   const monthNow = now.getMonth();
@@ -63,23 +63,23 @@ module.exports.Balance = async function(req, res) {
   const yearNow = now.getFullYear();
   const finance = await Finances.findOne({ idUser: id });
   const income = finance.income;
-  const mapIncome = income.map(function(a) {
+  const mapIncome = income.map(function (a) {
     return a.amount;
   });
-  const sumIncome = mapIncome.reduce(function(a, b) {
+  const sumIncome = mapIncome.reduce(function (a, b) {
     return a + b;
   }, 0);
   const expense = finance.expense;
-  const mapExpense = expense.map(function(a) {
+  const mapExpense = expense.map(function (a) {
     return a.amount;
   });
-  const sumExpense = mapExpense.reduce(function(a, b) {
+  const sumExpense = mapExpense.reduce(function (a, b) {
     return a + b;
   }, 0);
 
   const balance = sumIncome - sumExpense;
 
-  const filterExpenseMonth = expense.filter(function(a) {
+  const filterExpenseMonth = expense.filter(function (a) {
     const time = new Date(a.time);
     const getMonth = time.getMonth();
     const getYear = time.getFullYear();
@@ -89,14 +89,14 @@ module.exports.Balance = async function(req, res) {
       return false;
     }
   });
-  const amountExpenseThisMonth = filterExpenseMonth.map(function(a) {
+  const amountExpenseThisMonth = filterExpenseMonth.map(function (a) {
     return a.amount;
   });
-  const sumExpenseThisMonth = amountExpenseThisMonth.reduce(function(a, b) {
+  const sumExpenseThisMonth = amountExpenseThisMonth.reduce(function (a, b) {
     return a + b;
   }, 0);
 
-  const fillterExpenseToday = expense.filter(function(a) {
+  const fillterExpenseToday = expense.filter(function (a) {
     const time = new Date(a.time);
     const getMonth = time.getMonth();
     const getYear = time.getFullYear();
@@ -108,10 +108,10 @@ module.exports.Balance = async function(req, res) {
     }
   });
 
-  const mapExpenseToDay = fillterExpenseToday.map(function(a) {
+  const mapExpenseToDay = fillterExpenseToday.map(function (a) {
     return a.amount;
   });
-  const sumExpenseToDay = mapExpenseToDay.reduce(function(a, b) {
+  const sumExpenseToDay = mapExpenseToDay.reduce(function (a, b) {
     return a + b;
   }, 0);
 
@@ -120,18 +120,18 @@ module.exports.Balance = async function(req, res) {
     sumExpense,
     balance,
     sumExpenseThisMonth,
-    sumExpenseToDay
+    sumExpenseToDay,
   ];
 
   res.json(all);
 };
 // get Expense
 
-module.exports.getExpense = async function(req, res) {
+module.exports.getExpense = async function (req, res) {
   const id = req.params.id;
   const finance = await Finances.findOne({ idUser: id });
   const expense = finance.expense;
-  const sortExpense = expense.sort(function(a, b) {
+  const sortExpense = expense.sort(function (a, b) {
     let time1 = new Date(a.time);
     let time2 = new Date(b.time);
     let getTime1 = time1.getTime();
@@ -156,7 +156,7 @@ module.exports.getExpense = async function(req, res) {
     let time = sortExpense[0].time;
     let ojExpense = {
       time: time,
-      data: sortExpense
+      data: sortExpense,
     };
     arrExpense.push(ojExpense);
     res.json(arrExpense);
@@ -166,7 +166,7 @@ module.exports.getExpense = async function(req, res) {
     let time = arrFrist[0].time;
     let ojFrist = {
       time: time,
-      data: arrFrist
+      data: arrFrist,
     };
     arrExpense.push(ojFrist);
 
@@ -176,7 +176,7 @@ module.exports.getExpense = async function(req, res) {
         let time = arrFinal[0].time;
         let ojFinal = {
           time: time,
-          data: arrFinal
+          data: arrFinal,
         };
         arrExpense.push(ojFinal);
       } else {
@@ -184,7 +184,7 @@ module.exports.getExpense = async function(req, res) {
         let time = arrAmong[0].time;
         let ojAmong = {
           time: time,
-          data: arrAmong
+          data: arrAmong,
         };
         arrExpense.push(ojAmong);
       }
@@ -193,7 +193,7 @@ module.exports.getExpense = async function(req, res) {
   }
 };
 // get data chart line
-module.exports.getDataChartLine = async function(req, res) {
+module.exports.getDataChartLine = async function (req, res) {
   const id = req.params.id;
   const now = new Date();
   const day = now.getDay();
@@ -235,10 +235,10 @@ module.exports.getDataChartLine = async function(req, res) {
   }
   //// if arri = []
   if (arri.length === 0) {
-    const mapDataWeek = dataWeek.map(function(a) {
+    const mapDataWeek = dataWeek.map(function (a) {
       return a.amount;
     });
-    const sumDataWeek = mapDataWeek.reduce(function(a, b) {
+    const sumDataWeek = mapDataWeek.reduce(function (a, b) {
       return a + b;
     }, 0);
 
@@ -261,13 +261,13 @@ module.exports.getDataChartLine = async function(req, res) {
         dataEachDateOfWeek.push(arrAmong);
       }
     }
-    const sumDateOfWeek = dataEachDateOfWeek.map(function(a) {
+    const sumDateOfWeek = dataEachDateOfWeek.map(function (a) {
       if (Array.isArray(a) === true) {
         let time = a[0].time;
-        let changeArr = a.map(function(b) {
+        let changeArr = a.map(function (b) {
           return b.amount;
         });
-        let sum = changeArr.reduce(function(c, d) {
+        let sum = changeArr.reduce(function (c, d) {
           return c + d;
         }, 0);
         return { time: time, sumAmont: sum };
@@ -277,14 +277,14 @@ module.exports.getDataChartLine = async function(req, res) {
     });
 
     let reverseArr = sumDateOfWeek.reverse();
-    let mapReverseArr = reverseArr.map(function(sumAndtime) {
+    let mapReverseArr = reverseArr.map(function (sumAndtime) {
       let timeSum = new Date(sumAndtime.time);
       let daySum = timeSum.getDay();
       return daySum;
     });
     let arrDayOfWeek = [1, 2, 3, 4, 5, 6, 0];
 
-    let mapArrDayOfWeek = arrDayOfWeek.map(function(day) {
+    let mapArrDayOfWeek = arrDayOfWeek.map(function (day) {
       if (mapReverseArr.includes(day) === true) {
         return day;
       } else {
@@ -299,24 +299,35 @@ module.exports.getDataChartLine = async function(req, res) {
       let indexOf = mapArrDayOfWeek.indexOf(daySum);
       mapArrDayOfWeek.splice(indexOf, 1, sumAmont);
     }
-    res.json(mapArrDayOfWeek);
+    const deleteNullMapArrDayOfWeek = mapArrDayOfWeek.map(function (num, i) {
+      if (
+        mapArrDayOfWeek[i] === null &&
+        (mapArrDayOfWeek[i - 1] !== null || undefined) &&
+        (mapArrDayOfWeek[i + 1] !== null || undefined)
+      ) {
+        return 0;
+      } else {
+        return num;
+      }
+    });
+    res.json(deleteNullMapArrDayOfWeek);
   }
 };
 // get data doughnut
 
-module.exports.getDataDoughnut = async function(req, res) {
+module.exports.getDataDoughnut = async function (req, res) {
   const id = req.params.id;
   const finance = await Finances.findOne({ idUser: id });
   const expense = finance.expense;
 
-  const mapExpense = expense.map(function(a) {
+  const mapExpense = expense.map(function (a) {
     return a.amount;
   });
-  const sumExpense = mapExpense.reduce(function(a, b) {
+  const sumExpense = mapExpense.reduce(function (a, b) {
     return a + b;
   }, 0);
 
-  const sortExpense = expense.sort(function(a, b) {
+  const sortExpense = expense.sort(function (a, b) {
     let c = a.title;
     let d = b.title;
     return c.localeCompare(d);
@@ -332,13 +343,13 @@ module.exports.getDataDoughnut = async function(req, res) {
     }
   }
   if (arri.length === 0) {
-    const totalPercent = sortExpense.map(function(data) {
+    const totalPercent = sortExpense.map(function (data) {
       return {
         time: data.time,
         percentSumAmont: 100,
         title: data.title,
         color: data.color,
-        className: data.className
+        className: data.className,
       };
     });
     res.json(totalPercent);
@@ -357,16 +368,16 @@ module.exports.getDataDoughnut = async function(req, res) {
       }
     }
 
-    const sumFollowTitle = dataFollowTitle.map(function(a) {
+    const sumFollowTitle = dataFollowTitle.map(function (a) {
       if (Array.isArray(a) === true) {
         let time = a[0].time;
         let title = a[0].title;
         let color = a[0].color;
         let className = a[0].className;
-        let changeArr = a.map(function(b) {
+        let changeArr = a.map(function (b) {
           return b.amount;
         });
-        let sum = changeArr.reduce(function(c, d) {
+        let sum = changeArr.reduce(function (c, d) {
           return c + d;
         }, 0);
         return {
@@ -374,14 +385,14 @@ module.exports.getDataDoughnut = async function(req, res) {
           sumAmont: sum,
           title: title,
           color: color,
-          className: className
+          className: className,
         };
       } else {
         return a;
       }
     });
 
-    const mapPercentPerTotal = sumFollowTitle.map(function(data) {
+    const mapPercentPerTotal = sumFollowTitle.map(function (data) {
       let sumAmont = data.sumAmont;
       let percentSumAmont = (sumAmont / sumExpense) * 100;
       let percentSumAmontFixed = Math.round(percentSumAmont);
@@ -390,7 +401,7 @@ module.exports.getDataDoughnut = async function(req, res) {
         percentSumAmont: percentSumAmontFixed,
         title: data.title,
         color: data.color,
-        className: data.className
+        className: data.className,
       };
     });
 
@@ -399,13 +410,13 @@ module.exports.getDataDoughnut = async function(req, res) {
 };
 
 // get data chart bar
-module.exports.getDataCharBar = async function(req, res) {
+module.exports.getDataCharBar = async function (req, res) {
   const id = req.params.id;
   const now = new Date();
   const year = now.getFullYear();
   const finance = await Finances.findOne({ idUser: id });
   const expense = finance.expense;
-  const sortExpense = expense.sort(function(a, b) {
+  const sortExpense = expense.sort(function (a, b) {
     let time1 = new Date(a.time);
     let time2 = new Date(b.time);
     let getTime1 = time1.getTime();
@@ -413,7 +424,7 @@ module.exports.getDataCharBar = async function(req, res) {
     return getTime2 - getTime1;
   });
 
-  const filterFollowYear = sortExpense.filter(function(data) {
+  const filterFollowYear = sortExpense.filter(function (data) {
     let time = new Date(data.time);
     let getYear = time.getFullYear();
     if (getYear === year) {
@@ -437,10 +448,10 @@ module.exports.getDataCharBar = async function(req, res) {
   }
 
   if (arri.length === 0) {
-    const mapFilterFollowYear = filterFollowYear.map(function(data) {
+    const mapFilterFollowYear = filterFollowYear.map(function (data) {
       return data.amount;
     });
-    const sumFilterFollowYear = mapFilterFollowYear.reduce(function(a, b) {
+    const sumFilterFollowYear = mapFilterFollowYear.reduce(function (a, b) {
       return a + b;
     }, 0);
     const time = new Date(filterFollowYear[0].time);
@@ -448,7 +459,7 @@ module.exports.getDataCharBar = async function(req, res) {
 
     let arrDayOfMonth = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-    let mapArrDayOfMonth = arrDayOfMonth.map(function(month) {
+    let mapArrDayOfMonth = arrDayOfMonth.map(function (month) {
       if (month === getMonth) {
         return month;
       } else {
@@ -478,13 +489,13 @@ module.exports.getDataCharBar = async function(req, res) {
       }
     }
 
-    const sumDateOfMonth = dataFollowMonth.map(function(a) {
+    const sumDateOfMonth = dataFollowMonth.map(function (a) {
       if (Array.isArray(a) === true) {
         let time = a[0].time;
-        let changeArr = a.map(function(b) {
+        let changeArr = a.map(function (b) {
           return b.amount;
         });
-        let sum = changeArr.reduce(function(c, d) {
+        let sum = changeArr.reduce(function (c, d) {
           return c + d;
         }, 0);
         return { time: time, sumMonth: sum };
@@ -493,7 +504,7 @@ module.exports.getDataCharBar = async function(req, res) {
       }
     });
 
-    let mapArrMonth = sumDateOfMonth.map(function(sumAndtime) {
+    let mapArrMonth = sumDateOfMonth.map(function (sumAndtime) {
       let timeSum = new Date(sumAndtime.time);
       let monthSum = timeSum.getMonth();
       return monthSum;
@@ -501,7 +512,7 @@ module.exports.getDataCharBar = async function(req, res) {
 
     let arrDayOfMonth = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-    let mapArrDayOfMonth = arrDayOfMonth.map(function(month) {
+    let mapArrDayOfMonth = arrDayOfMonth.map(function (month) {
       if (mapArrMonth.includes(month) === true) {
         return month;
       } else {
@@ -523,7 +534,7 @@ module.exports.getDataCharBar = async function(req, res) {
 
 // get Income
 
-module.exports.getIncome = async function(req, res) {
+module.exports.getIncome = async function (req, res) {
   const id = req.params.id;
   const finance = await Finances.findOne({ idUser: id });
   const income = finance.income;
