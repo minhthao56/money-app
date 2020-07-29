@@ -23,7 +23,7 @@ const uri =
 mongoose.connect(uri, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-  useFindAndModify: false,
+  useFindAndModify: false
 });
 const connection = mongoose.connection;
 connection.once("open", () => {
