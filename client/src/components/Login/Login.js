@@ -25,7 +25,7 @@ export default function User() {
 
   const DarkMode = JSON.parse(localStorage.getItem("dark"));
   const dispatch = useDispatch();
-  const url = "https://fsklf.sse.codesandbox.io/";
+  const url = "https://qie1e.sse.codesandbox.io/";
 
   const validationCharacter = new RegExp(/^[a-zA-Z0-9!@#$%^&*()_+]+$/, "g");
   const validationEmail = new RegExp(

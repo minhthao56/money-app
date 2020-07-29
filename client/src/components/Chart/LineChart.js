@@ -16,7 +16,7 @@ export default function LineChart(props) {
   const Balance = useSelector((state) => state.Balance);
   const DarkMode = useSelector((state) => state.DarkMode);
   const { dataDataChatLine, dataDataChartBar, checkLogined } = props;
-  const url = "https://fsklf.sse.codesandbox.io/";
+  const url = "https://qie1e.sse.codesandbox.io/";
 
   const dataChartLine = () => {
     setDataChart({
