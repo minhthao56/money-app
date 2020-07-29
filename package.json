@@ -1,7 +1,7 @@
 {
-  "name": "node-http-server",
+  "name": "be-money-app",
   "version": "1.0.0",
-  "description": "Node.js example server starter project",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
