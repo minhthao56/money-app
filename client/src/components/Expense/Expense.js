@@ -34,7 +34,7 @@ export default function Expense(props) {
     hanleOpenCategory,
     fetchDataChartBar,
   } = props;
-  const url = "https://qie1e.sse.codesandbox.io/";
+  const url = "https://be-money.herokuapp.com/";
   const regex = new RegExp("^[0-9]+$");
 
   // value amount

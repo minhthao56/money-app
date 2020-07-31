@@ -25,7 +25,7 @@ export default function User() {
   const [isErrCreateUser, setIsErrCreateUser] = useState(false);
 
   const DarkMode = JSON.parse(localStorage.getItem("dark"));
-  const url = "https://qie1e.sse.codesandbox.io/";
+  const url = "https://be-money.herokuapp.com/";
   let history = useHistory();
 
   const validationEmail = new RegExp(

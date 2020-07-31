@@ -8,7 +8,7 @@ export default function ForgotPass(props) {
 
   const { handleCloseForgotPass } = props;
   const dark = JSON.parse(localStorage.getItem("dark"));
-  const url = "https://qie1e.sse.codesandbox.io/";
+  const url = "https://be-money.herokuapp.com/";
 
   // handle Value Email
   const handleValueEmail = (event) => {

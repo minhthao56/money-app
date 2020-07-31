@@ -25,7 +25,7 @@ export default function User() {
 
   const DarkMode = JSON.parse(localStorage.getItem("dark"));
   const dispatch = useDispatch();
-  const url = "https://qie1e.sse.codesandbox.io/";
+  const url = "https://be-money.herokuapp.com/";
 
   const validationCharacter = new RegExp(/^[a-zA-Z0-9!@#$%^&*()_+]+$/, "g");
   const validationEmail = new RegExp(
@@ -119,6 +119,7 @@ export default function User() {
                   {isErrEmail === true ? (
                     <span className="msg-err">*Don't try to hack email</span>
                   ) : null}
+                  <span>minhthao5648@gmail.com</span>
                   <input
                     type="email"
                     name="email"
@@ -132,6 +133,7 @@ export default function User() {
                   {isShowErrCharacter === true ? (
                     <span className="msg-err">*Don't try to hack password</span>
                   ) : null}
+                  <span>12345678</span>
                   <input
                     type="password"
                     name="password"

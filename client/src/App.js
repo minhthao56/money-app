@@ -28,7 +28,7 @@ export default function App() {
 
   const dispatch = useDispatch();
 
-  const url = "https://qie1e.sse.codesandbox.io/";
+  const url = "https://be-money.herokuapp.com/";
   const token = localStorage.getItem("token");
 
   //  check login

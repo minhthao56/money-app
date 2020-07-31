@@ -22,7 +22,7 @@ export default function Profile(props) {
   const Blur = useSelector((state) => state.Blur);
 
   const { dataIcome, checkLogined } = props;
-  const url = "https://qie1e.sse.codesandbox.io/";
+  const url = "https://be-money.herokuapp.com/";
   const DarkMode = useSelector((state) => state.DarkMode);
 
   const handleChangeInfo = (num) => {

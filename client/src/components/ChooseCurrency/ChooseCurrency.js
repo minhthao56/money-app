@@ -12,7 +12,7 @@ export default function ChooseCurrency(props) {
 
   const { handleLoseChooseCurrency } = props;
 
-  const url = "https://qie1e.sse.codesandbox.io/";
+  const url = "https://be-money.herokuapp.com/";
 
   const fullDataCurrency = [];
   for (let i = 0; i < dataCurrency.length; i++) {
