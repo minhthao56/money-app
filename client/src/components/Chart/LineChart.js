@@ -4,6 +4,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { Progress } from "antd";
 
+// import { useFormik } from "formik";
+// import * as Yup from "yup";
+
 import "./Chart.scss";
 export default function LineChart(props) {
   const [dataChart, setDataChart] = useState({});
@@ -73,6 +76,44 @@ export default function LineChart(props) {
   const handleShowAddMoney = () => {
     SetIsShowAddMoney(!isShowAddMoney);
   };
+
+  // // Validation
+  // const LoginSchema = Yup.object().shape({
+  //   email: Yup.string().email("Invalid email").required("Required"),
+  //   password: Yup.string().min(6).max(10),
+  // });
+
+  // // hanlde Submit
+  // const formik = useFormik({
+  //   initialValues: {
+  //     email: "",
+  //     password: "",
+  //   },
+  //   validationSchema: LoginSchema,
+  //   onSubmit: (values) => {
+  //     axios
+  //       .post(url + "users/login", values)
+  //       .then((res) => {
+  //         dispatch({
+  //           type: "CHECK_LOGGED",
+  //           data: res.data,
+  //         });
+  //         if (res.data.token) {
+  //           localStorage.setItem("token", res.data.token.toString());
+  //         }
+  //         window.location.replace("/");
+  //       })
+  //       .catch((err) => {
+  //         if (err.response === undefined) {
+  //           console.log(err);
+  //         } else if (err.response.status === 401) {
+  //           setIsErrLogin(true);
+  //           setMesErr(err.response.data.msg);
+  //         }
+  //       });
+  //   },
+  // });
+
   // handle Value Add Money
   const hanleVulueMoney = (e) => {
     const value = e.target.value;
@@ -102,6 +143,7 @@ export default function LineChart(props) {
   const hanldeShowChartBar = () => {
     setIsShowChartLine(false);
   };
+
   return (
     <div
       className={

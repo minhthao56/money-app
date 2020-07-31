@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import { Row, Col, Alert } from "antd";
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 import "antd/dist/antd.css";
 import "../SignUp/SiguUp.scss";
@@ -10,58 +13,34 @@ import ImageFinance from "../../images/finance.png";
 import DarkImageFinance from "../../images/time.png";
 import Login from "../../images/Login.svg";
 import ForgotPass from "./ForgotPass";
-import { useDispatch } from "react-redux";
 
 export default function User() {
   const [mesErr, setMesErr] = useState("");
   const [isErrLogin, setIsErrLogin] = useState(false);
 
-  const [valueEmail, setValueEmail] = useState("");
-  const [valuePassword, setValuePassword] = useState("");
   const [isShowForgotPass, setIsShowForgotPass] = useState(false);
-
-  const [isShowErrCharacter, setIsShowErrCharacter] = useState(false);
-  const [isErrEmail, setIsErrEmail] = useState(false);
 
   const DarkMode = JSON.parse(localStorage.getItem("dark"));
   const dispatch = useDispatch();
   const url = "https://be-money.herokuapp.com/";
 
-  const validationCharacter = new RegExp(/^[a-zA-Z0-9!@#$%^&*()_+]+$/, "g");
-  const validationEmail = new RegExp(
-    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
-    "g"
-  );
+  // Validation
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Required"),
+    password: Yup.string().min(6).max(10),
+  });
 
-  // Handle mail
-  const handleChangeEmail = (event) => {
-    const value = event.target.value;
-    setValueEmail(value);
-  };
-  // Hanlde password
-  const handleChangePasword = (event) => {
-    const value = event.target.value;
-    setValuePassword(value);
-  };
-
-  // Handle submit
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (validationEmail.test(valueEmail) === false) {
-      setIsErrEmail(true);
-    } else if (validationCharacter.test(valuePassword) === false) {
-      setIsShowErrCharacter(true);
-    } else {
-      const user = {
-        email: valueEmail,
-        password: valuePassword,
-      };
-
+  // hanlde Submit
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginSchema,
+    onSubmit: (values) => {
       axios
-        .post(url + "users/login", user)
+        .post(url + "users/login", values)
         .then((res) => {
-          setValueEmail("");
-          setValuePassword("");
           dispatch({
             type: "CHECK_LOGGED",
             data: res.data,
@@ -79,8 +58,9 @@ export default function User() {
             setMesErr(err.response.data.msg);
           }
         });
-    }
-  };
+    },
+  });
+
   // handle Close Forgot Pass
   const handleCloseForgotPass = () => {
     setIsShowForgotPass(!isShowForgotPass);
@@ -114,33 +94,39 @@ export default function User() {
                   showIcon
                 />
               ) : null}
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={formik.handleSubmit}>
                 <div className="form-group">
-                  {isErrEmail === true ? (
-                    <span className="msg-err">*Don't try to hack email</span>
-                  ) : null}
                   <span>minhthao5648@gmail.com</span>
+                  <br />
+                  <span className="msg-err">
+                    {formik.touched.email && formik.errors.email}
+                  </span>
                   <input
                     type="email"
                     name="email"
-                    value={valueEmail}
+                    id="email"
+                    value={formik.values.email}
                     placeholder="Email"
-                    onChange={handleChangeEmail}
-                    required
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={formik.errors.email ? "err-validation" : null}
                   />
                 </div>
                 <div className="form-group">
-                  {isShowErrCharacter === true ? (
-                    <span className="msg-err">*Don't try to hack password</span>
-                  ) : null}
                   <span>12345678</span>
+                  <br />
+                  <span className="msg-err">
+                    {formik.touched.password && formik.errors.password}
+                  </span>
                   <input
                     type="password"
                     name="password"
-                    value={valuePassword}
+                    id="password"
                     placeholder="Password"
-                    onChange={handleChangePasword}
-                    required
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                    onBlur={formik.handleBlur}
+                    className={formik.errors.password ? "err-validation" : null}
                   />
                 </div>
                 <button type="submit" id={DarkMode ? "bt-login" : null}>

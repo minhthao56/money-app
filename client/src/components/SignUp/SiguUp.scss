@@ -83,11 +83,16 @@
         color: rgba(196, 161, 251, 0.2);
       }
       &:focus {
-        outline-color: $main-coler;
+        outline: none;
       }
       &:hover {
         background-color: rgba(232, 218, 255, 0.4);
       }
+    }
+    .err-validation {
+      border: solid;
+      border-color: rgb(224, 61, 61);
+      border-width: 1px;
     }
     button {
       border: none;
