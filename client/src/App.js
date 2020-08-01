@@ -1,6 +1,6 @@
 import React from "react";
 
-import Routers from "./Routers/index";
+import Routers from "./routers/index";
 
 export default function App() {
   return (

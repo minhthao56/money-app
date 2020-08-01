@@ -4,13 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
-import "../../weather-icons/css/weather-icons.min.css";
+import "../../assets/weather-icons/css/weather-icons.min.css";
 
 import "./Dawer.scss";
 import "../Nav/Nav.scss";
 
-import Logo from "../../images/finance.png";
-import DarkLogo from "../../images/time.png";
+import Logo from "../../assets/images/finance.png";
+import DarkLogo from "../../assets/images/time.png";
 
 export default function Dawer() {
   const [visible, setVisible] = useState(false);

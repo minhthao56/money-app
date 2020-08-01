@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
-import "../../weather-icons/css/weather-icons.min.css";
+import "../../assets/weather-icons/css/weather-icons.min.css";
 
 import "./Nav.scss";
-import ImageFinance from "../../images/finance.png";
-import LogoForDarkMode from "../../images/time.png";
+import ImageFinance from "../../assets/images/finance.png";
+import LogoForDarkMode from "../../assets/images/time.png";
 import Dawer from "../Dawer/Dawer";
 
 export default function Nav(props) {
