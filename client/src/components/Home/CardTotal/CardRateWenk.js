@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./CardTotal.scss";
 import { useSelector } from "react-redux";
 export default function CardRateWenk(props) {
-  const { dataChatLine } = props;
+  const dataChatLine = [];
 
   const [dataSumWeek, setDataSumWeek] = useState(0);
   const CheckLogin = useSelector((state) => state.CheckLogin);

@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import "antd/dist/antd.css";
 
 // pick a date util library
 import MomentUtils from "@date-io/moment";

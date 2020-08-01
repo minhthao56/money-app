@@ -1,4 +1,4 @@
-@import "../../CSSSRecylce/mixin.scss";
+@import "../assets/scss/mixin.scss";
 
 .container-home {
   margin-left: 70px;
@@ -13,8 +13,7 @@
 .light {
   background-color: white;
 }
-.display-category {
-}
+
 // dark mode
 .dark {
   background-color: #000000;

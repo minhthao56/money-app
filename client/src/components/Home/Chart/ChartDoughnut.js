@@ -9,7 +9,7 @@ export default function ChartDoughnut(props) {
   const Balance = useSelector((state) => state.Balance);
   const DarkMode = useSelector((state) => state.DarkMode);
   const CheckLogin = useSelector((state) => state.CheckLogin);
-  const { datatDataDoughnut } = props;
+  const datatDataDoughnut = [];
   const backgroundColor = [
     "#008879",
     "#00C2AE",

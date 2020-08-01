@@ -3,8 +3,8 @@ import axios from "axios";
 import moment from "moment";
 
 import "./CardWeatherMini.scss";
-import "../../weather-icons/css/weather-icons.min.css";
-import "../../weather-icons/css/weather-icons-wind.min.css";
+import "../../../assets/weather-icons/css/weather-icons.min.css";
+import "../../../assets/weather-icons/css/weather-icons-wind.min.css";
 export default function CardWeatherMini() {
   const [dataWeather, setDataWeather] = useState({});
   const [city, setCity] = useState("");

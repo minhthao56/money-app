@@ -8,7 +8,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import { deepPurple, grey } from "@material-ui/core/colors";
 
 import { Lottie } from "@crello/react-lottie";
-import animationData from "../../images/wallet-icon.json";
+import animationData from "../../../assets/images/wallet-icon.json";
 import "./Expense.scss";
 
 export default function Expense(props) {

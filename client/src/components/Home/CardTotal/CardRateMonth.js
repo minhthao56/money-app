@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "./CardTotal.scss";
-import "../../weather-icons/css/weather-icons.css";
+import "../../../assets/weather-icons/css/weather-icons.css";
+
 export default function CardRateMonth() {
   const Balance = useSelector((state) => state.Balance);
   const CheckLogin = useSelector((state) => state.CheckLogin);

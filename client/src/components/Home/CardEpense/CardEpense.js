@@ -6,7 +6,7 @@ import "./CardEpense.scss";
 import HistortyADay from "./HistortyADay";
 
 export default function CardEpense(props) {
-  const { dataExpense } = props;
+  const dataExpense = [];
   const DarkMode = useSelector((state) => state.DarkMode);
   const CheckLogin = useSelector((state) => state.CheckLogin);
   const [sum, setSum] = useState(0);

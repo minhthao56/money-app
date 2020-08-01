@@ -5,9 +5,9 @@ import Moment from "react-moment";
 
 import "./Curency.scss";
 
-import VN from "../../images/vietnam.png";
-import EU from "../../images/world.png";
-import JP from "../../images/japan.png";
+import VN from "../../../assets/images/vietnam.png";
+import EU from "../../../assets/images/world.png";
+import JP from "../../../assets/images/japan.png";
 
 export default function Currency() {
   const [dataCurrency, setDataCurrency] = useState(0);
