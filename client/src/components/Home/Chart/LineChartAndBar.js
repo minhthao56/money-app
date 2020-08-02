@@ -22,7 +22,7 @@ export default function LineChart(props) {
   const Balance = useSelector((state) => state.Balance);
   const DarkMode = useSelector((state) => state.DarkMode);
 
-  const { dataFetchChartLine, dataDataChartBar, handleAddIncome } = props;
+  const { dataFetchChartLine, dataFetchChartBar, handleAddIncome } = props;
 
   useEffect(() => {
     setDataChartLine({
@@ -46,7 +46,7 @@ export default function LineChart(props) {
       datasets: [
         {
           label: "Expense",
-          data: dataDataChartBar,
+          data: dataFetchChartBar,
           backgroundColor: "rgba(196, 161, 251, 1)",
           barPercentage: 0.5,
           barThickness: 6,
@@ -55,7 +55,7 @@ export default function LineChart(props) {
         },
       ],
     });
-  }, [dataFetchChartLine, dataDataChartBar]);
+  }, [dataFetchChartLine, dataFetchChartBar]);
 
   // Validation
   const ValidationSchema = Yup.object().shape({

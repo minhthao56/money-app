@@ -9,5 +9,9 @@ const apiHome = {
     const url = "finance/get/chartline";
     return axiosClient.get(url);
   },
+  getDataChartBar: () => {
+    const url = "finance/get/chartbar";
+    return axiosClient.get(url);
+  },
 };
 export default apiHome;

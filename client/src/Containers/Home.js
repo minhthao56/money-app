@@ -22,6 +22,7 @@ export default function Home() {
 
   const [expanded, setExpanded] = useState(false);
   const [dataFetchChartLine, setDataFetchChartLine] = useState([]);
+  const [dataFetchChartBar, setDataFetchChartBar] = useState([]);
 
   const hanleCloseCategory = () => {
     setExpanded(!expanded);
@@ -44,7 +45,10 @@ export default function Home() {
     apiHome.getDataChartLine().then((res) => {
       setDataFetchChartLine(res);
     });
-  });
+    apiHome.getDataChartBar().then((res) => {
+      setDataFetchChartBar(res);
+    });
+  }, []);
 
   return (
     <div className={DarkMode ? "dark" : "light"}>
@@ -87,6 +91,7 @@ export default function Home() {
             <LineChartAndBar
               handleAddIncome={handleAddIncome}
               dataFetchChartLine={dataFetchChartLine}
+              dataFetchChartBar={dataFetchChartBar}
             />
             <ChartDoughnut />
           </Col>
