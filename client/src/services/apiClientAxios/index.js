@@ -1,12 +1,13 @@
 import axios from "axios";
 import queryString from "query-string";
 
-// const token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 const axiosClient = axios.create({
-  baseURL: "https://be-money.herokuapp.com/",
+  baseURL: "http://localhost:8080",
   headers: {
     "content-type": "application/json",
+    auth: token,
   },
   paramsSerializer: (params) => queryString.stringify(params),
 });
