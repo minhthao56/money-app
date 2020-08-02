@@ -81,6 +81,13 @@
       outline-color: rgba(196, 161, 251, 1);
     }
   }
+  .dark-input-add-money {
+    background-color: rgba($color: #333333, $alpha: 1);
+    border-color: #333333;
+    &:hover {
+      background-color: #444444;
+    }
+  }
   button {
     color: rgba(196, 161, 251, 1);
     background-color: rgb(250, 247, 255);
@@ -252,13 +259,7 @@
     background-color: $color-dark;
   }
 }
-#dark-input-add-money {
-  background-color: rgba($color: #333333, $alpha: 1);
-  border-color: #333333;
-  &:hover {
-    background-color: #444444;
-  }
-}
+
 #dark-fa-plus,
 #dark-fa-paper-plane {
   background-color: #333333;

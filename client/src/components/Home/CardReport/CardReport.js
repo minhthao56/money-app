@@ -1,16 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import "./CardTotal.scss";
 import "../../../assets/weather-icons/css/weather-icons.css";
 
-export default function CardRateMonth() {
-  const Balance = useSelector((state) => state.Balance);
-  const CheckLogin = useSelector((state) => state.CheckLogin);
+export default function CardRateMonth(props) {
+  const { titleCard, timeCard, moneyExpense, defaultCurrency } = props;
 
   return (
     <div className="container-card-total card-month">
       <div className="header-card-total">
-        <h3>Total Expense This Month</h3>
+        <h3>{titleCard}</h3>
       </div>
       <div className="main-card-total">
         <div className="icon-card-total">
@@ -18,11 +16,11 @@ export default function CardRateMonth() {
         </div>
         <div className="money-card-total">
           <span>
-            <b>Month</b>
+            <b>{timeCard}</b>
           </span>
           <span className="money-sub-card">
-            {Balance[3]}
-            {CheckLogin.data && CheckLogin.data.defaultCurrency}
+            {moneyExpense}
+            {defaultCurrency}
           </span>
         </div>
       </div>

@@ -8,7 +8,6 @@ import { FormLogin, ImageLogin } from "../components/Login";
 import { ForgotPassword } from "../components/Modal";
 // AIP services
 import apiLogin from "../services/apiClientAxios/apiLogin";
-import aipForgotPass from "../services/apiClientAxios/apiForgotPass";
 
 export default function User() {
   const [mesErr, setMesErr] = useState("");
@@ -16,6 +15,7 @@ export default function User() {
   const [isShowForgotPass, setIsShowForgotPass] = useState(false);
   let history = useHistory();
   const DarkMode = JSON.parse(localStorage.getItem("dark"));
+
   // Handle Show and close pass
   const handleShowForgotPass = () => {
     setIsShowForgotPass(true);
@@ -46,7 +46,7 @@ export default function User() {
   };
   // handleFogotPassword
   const handleFogotPassword = (values) => {
-    aipForgotPass.postForgot(values).then((res) => handleCloseForgotPass());
+    apiLogin.postForgot(values).then((res) => handleCloseForgotPass());
   };
   return (
     <div>

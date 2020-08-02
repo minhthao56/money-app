@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { Line, Bar } from "react-chartjs-2";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { Progress } from "antd";
-
-// import { useFormik } from "formik";
-// import * as Yup from "yup";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
+//scss
 import "./Chart.scss";
-export default function LineChart(props) {
-  const [dataChart, setDataChart] = useState({});
-  const [dataChartBar, setDataChartBar] = useState({});
-  const [isShowAddMoney, SetIsShowAddMoney] = useState(false);
-  const [moneyAdd, setMoneyAdd] = useState("");
-  const [isShowChartLine, setIsShowChartLine] = useState(true);
+//constant
+import { lableChartLine, lableChartBar } from "../../../config";
 
+export default function LineChart(props) {
+  //set up chart
+  const [dataChartLine, setDataChartLine] = useState({});
+  const [dataChartBar, setDataChartBar] = useState({});
+  //Show add incom
+  const [isShowAddMoney, SetIsShowAddMoney] = useState(false);
+  //Show chart bar and line
+  const [isShowChartLine, setIsShowChartLine] = useState(true);
+  // Redux
   const CheckLogin = useSelector((state) => state.CheckLogin);
   const Balance = useSelector((state) => state.Balance);
   const DarkMode = useSelector((state) => state.DarkMode);
-  const { dataDataChatLine, dataDataChartBar, checkLogined } = props;
-  const url = "https://be-money.herokuapp.com/";
 
-  const dataChartLine = () => {
-    setDataChart({
-      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  const { dataFetchChartLine, dataDataChartBar, handleAddIncome } = props;
+
+  useEffect(() => {
+    setDataChartLine({
+      labels: lableChartLine,
       datasets: [
         {
           label: "Expense",
-          data: dataDataChatLine,
+          data: dataFetchChartLine,
           borderColor: "rgba(196, 161, 251, 1)",
           borderWidth: 2,
           fill: false,
@@ -37,23 +40,9 @@ export default function LineChart(props) {
         },
       ],
     });
-  };
-  const handleDataChartBar = () => {
+
     setDataChartBar({
-      labels: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ],
+      labels: lableChartBar,
       datasets: [
         {
           label: "Expense",
@@ -66,76 +55,24 @@ export default function LineChart(props) {
         },
       ],
     });
-  };
+  }, [dataFetchChartLine, dataDataChartBar]);
 
-  useEffect(() => {
-    dataChartLine();
-    handleDataChartBar();
-  }, [dataDataChatLine, dataDataChartBar]);
+  // Validation
+  const ValidationSchema = Yup.object().shape({
+    amount: Yup.number().moreThan(0),
+  });
+  // hanlde Submit
+  const formik = useFormik({
+    initialValues: {
+      amount: "",
+    },
+    validationSchema: ValidationSchema,
+    onSubmit: (values, { resetForm }) => handleAddIncome(values, resetForm),
+  });
+
   // handle Show Add Money
   const handleShowAddMoney = () => {
     SetIsShowAddMoney(!isShowAddMoney);
-  };
-
-  // // Validation
-  // const LoginSchema = Yup.object().shape({
-  //   email: Yup.string().email("Invalid email").required("Required"),
-  //   password: Yup.string().min(6).max(10),
-  // });
-
-  // // hanlde Submit
-  // const formik = useFormik({
-  //   initialValues: {
-  //     email: "",
-  //     password: "",
-  //   },
-  //   validationSchema: LoginSchema,
-  //   onSubmit: (values) => {
-  //     axios
-  //       .post(url + "users/login", values)
-  //       .then((res) => {
-  //         dispatch({
-  //           type: "CHECK_LOGGED",
-  //           data: res.data,
-  //         });
-  //         if (res.data.token) {
-  //           localStorage.setItem("token", res.data.token.toString());
-  //         }
-  //         window.location.replace("/");
-  //       })
-  //       .catch((err) => {
-  //         if (err.response === undefined) {
-  //           console.log(err);
-  //         } else if (err.response.status === 401) {
-  //           setIsErrLogin(true);
-  //           setMesErr(err.response.data.msg);
-  //         }
-  //       });
-  //   },
-  // });
-
-  // handle Value Add Money
-  const hanleVulueMoney = (e) => {
-    const value = e.target.value;
-    setMoneyAdd(value);
-  };
-  // handle Sub Add Money
-  const handleSubAddMoney = (e) => {
-    e.preventDefault();
-    const inFoMoney = {
-      amount: moneyAdd,
-      idUser: CheckLogin.data._id,
-    };
-    axios
-      .post(url + "finance/income", inFoMoney)
-      .then((res) => {
-        console.log(res.data);
-        setMoneyAdd("");
-        return checkLogined();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
   const hanldeShowChartLine = () => {
     setIsShowChartLine(true);
@@ -170,7 +107,7 @@ export default function LineChart(props) {
                 <i className="fas fa-plus"></i>
               </div>
               <form
-                onSubmit={handleSubAddMoney}
+                onSubmit={formik.handleSubmit}
                 className={
                   isShowAddMoney ? "display-add-money" : "hidden-add-money"
                 }
@@ -178,9 +115,12 @@ export default function LineChart(props) {
                 <input
                   type="text"
                   placeholder="Money"
-                  onChange={hanleVulueMoney}
-                  value={moneyAdd}
-                  id={DarkMode ? "dark-input-add-money" : null}
+                  id="amount"
+                  name="amount"
+                  value={formik.values.amount}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  className={DarkMode ? "dark-input-add-money" : null}
                 />
                 <button
                   type="submit"
@@ -212,7 +152,7 @@ export default function LineChart(props) {
       </div>
       {isShowChartLine ? (
         <Line
-          data={dataChart}
+          data={dataChartLine}
           options={{
             responsive: true,
             scales: {
