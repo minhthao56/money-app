@@ -1,30 +1,20 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Alert } from "antd";
-
+// Icon
 import ImageFinance from "../../../assets/images/finance.png";
 import DarkImageFinance from "../../../assets/images/time.png";
-// import ForgotPass from "./ForgotPass";
 
-// AIP services
-import apiLogin from "../../../services/apiClientAxios/apiLogin";
-
-export default function FormLogin() {
-  const [mesErr, setMesErr] = useState("");
-  const [isErrLogin, setIsErrLogin] = useState(false);
-  const [isShowForgotPass, setIsShowForgotPass] = useState(false);
-
+export default function FormLogin(props) {
+  const { handleShowForgotPass, handleLogin, isErrLogin, mesErr } = props;
   const DarkMode = JSON.parse(localStorage.getItem("dark"));
-  let history = useHistory();
-
   // Validation
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string().min(6).max(10),
   });
-
   // hanlde Submit
   const formik = useFormik({
     initialValues: {
@@ -32,37 +22,8 @@ export default function FormLogin() {
       password: "",
     },
     validationSchema: LoginSchema,
-    onSubmit: (values) => {
-      apiLogin
-        .postLogin(values)
-        .then((res) => {
-          if (res) {
-            localStorage.setItem("token", res.toString());
-            window.location.replace("/");
-          } else {
-            history.push("/user/login");
-          }
-        })
-        .catch((err) => {
-          if (err.response === undefined) {
-            console.log(err);
-          } else if (err.response.status === 401) {
-            setIsErrLogin(true);
-            setMesErr(err.response.data.msg);
-          }
-        });
-    },
+    onSubmit: (values) => handleLogin(values),
   });
-
-  // handle Close Forgot Pass
-  const handleCloseForgotPass = () => {
-    setIsShowForgotPass(!isShowForgotPass);
-  };
-  // handle Show Forgot Pass
-  const handleShowForgotPass = () => {
-    setIsShowForgotPass(!isShowForgotPass);
-  };
-
   return (
     <div className="col2-signup">
       <div
@@ -120,7 +81,9 @@ export default function FormLogin() {
             Login
           </button>
           <div className="forgot-pass">
-            <span onClick={handleShowForgotPass}>I Forgot My Password</span>
+            <span onClick={() => handleShowForgotPass()}>
+              I Forgot My Password
+            </span>
           </div>
         </form>
         <p className="policy">

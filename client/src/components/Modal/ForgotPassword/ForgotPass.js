@@ -1,28 +1,26 @@
-import React, { useState } from "react";
-import axios from "axios";
-
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+// scss
 import "./Forgot.scss";
 
 export default function ForgotPass(props) {
-  const [email, setEmail] = useState();
-
-  const { handleCloseForgotPass } = props;
+  const { handleCloseForgotPass, handleFogotPassword } = props;
   const dark = JSON.parse(localStorage.getItem("dark"));
-  const url = "https://be-money.herokuapp.com/";
+  // Validation
+  const LoginSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Required"),
+    password: Yup.string().min(6).max(10),
+  });
+  // hanlde Submit
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: LoginSchema,
+    onSubmit: (values) => handleFogotPassword(values),
+  });
 
-  // handle Value Email
-  const handleValueEmail = (event) => {
-    const value = event.target.value;
-    setEmail(value);
-  };
-  // handle Submit Fotgot Pass
-  const handleSubmitFotgotPass = async (event) => {
-    event.preventDefault();
-    const forgotEmail = { email: email };
-    const res = await axios.post(url + "users/forgot", forgotEmail);
-    console.log(res.data);
-    setEmail("");
-  };
   return (
     <div className="container-form-fogot">
       <div
@@ -43,13 +41,16 @@ export default function ForgotPass(props) {
           ></i>
         </div>
         <div className="form-send-address">
-          <form onSubmit={handleSubmitFotgotPass}>
+          <form onSubmit={formik.handleSubmit}>
             <input
               type="email"
-              placeholder="Your email"
-              onChange={handleValueEmail}
-              value={email}
-              required
+              name="email"
+              id="email"
+              value={formik.values.email}
+              placeholder="Email"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className={formik.errors.email ? "err-validation" : null}
             />
             <div
               className={

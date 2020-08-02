@@ -1,22 +1,15 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 import Alert from "@material-ui/lab/Alert";
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+//Icon
 import ImageFinance from "../../../assets/images/finance.png";
 import DarkImageFinance from "../../../assets/images/time.png";
 
-export default function FromSignUp() {
-  const [isErrCreateUser, setIsErrCreateUser] = useState(false);
+export default function FromSignUp(props) {
   const DarkMode = JSON.parse(localStorage.getItem("dark"));
-
-  const url = "https://be-money.herokuapp.com/";
-  let history = useHistory();
-
+  const { handleSignUp, isErrCreateUser } = props;
   // Validation
   const SignUpSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
@@ -30,21 +23,7 @@ export default function FromSignUp() {
       password: "",
     },
     validationSchema: SignUpSchema,
-    onSubmit: (values) => {
-      axios
-        .post(url + "users/signup", values)
-        .then((res) => {
-          history.push("/user/login");
-        })
-        .catch((err) => {
-          if (err.response === undefined) {
-            console.log(err);
-          } else if (err.response.status === 400) {
-            setIsErrCreateUser(true);
-            console.log(err.response.data.msg);
-          }
-        });
-    },
+    onSubmit: (values) => handleSignUp(values),
   });
 
   return (
@@ -85,7 +64,6 @@ export default function FromSignUp() {
             <span className="msg-err">
               {formik.touched.email && formik.errors.email}
             </span>
-
             <input
               type="email"
               name="email"
