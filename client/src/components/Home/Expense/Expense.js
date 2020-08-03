@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 import { KeyboardDateTimePicker } from "@material-ui/pickers";
 import { createMuiTheme } from "@material-ui/core";
@@ -12,90 +13,46 @@ import animationData from "../../../assets/images/wallet-icon.json";
 import "./Expense.scss";
 
 export default function Expense(props) {
-  const [valueAmount, setValueAmount] = useState("");
-  const [valuaDes, setValuaDes] = useState("");
-  const [isShowErr, setIsShowErr] = useState(false);
-  const [isShowErrSelect, setIsShowErrSelect] = useState(false);
-
   const Category = useSelector((state) => state.Category);
-  const Balance = useSelector((state) => state.Balance);
   const DarkMode = useSelector((state) => state.DarkMode);
   const CheckLogin = useSelector((state) => state.CheckLogin);
-  const dispatch = useDispatch();
 
   const now = new Date();
   const [selectedDate, handleDateChange] = useState(now);
 
-  const {
-    fetchDataBalance,
-    fetchDataChartLine,
-    fetchDataChartDoughnut,
-    fetchDataFetchExpense,
-    hanleOpenCategory,
-    fetchDataChartBar,
-  } = props;
-  const url = "https://be-money.herokuapp.com/";
-  const regex = new RegExp("^[0-9]+$");
+  const { hanleOpenCategory, balance, handleSubmitExpense } = props;
 
-  // value amount
-  const hanldeValueAmount = (e) => {
-    const value = e.target.value;
-    setValueAmount(value);
-  };
-  // value Des
-  const hanldeValueDes = (e) => {
-    const value = e.target.value;
-    setValuaDes(value);
-  };
+  // Validation
+  const SignUpSchema = Yup.object().shape({
+    amount: Yup.number().moreThan(0).required("Require"),
+    des: Yup.string(),
+  });
+  const formik = useFormik({
+    initialValues: {
+      amount: "",
+      des: "",
+    },
+    validationSchema: SignUpSchema,
+    onSubmit: (values, { resetForm }) => {
+      return handleSubmitExpense(values, resetForm, selectedDate);
+    },
+  });
 
-  // handle Submit Expense
-  const handleSubmitExpense = (event) => {
-    event.preventDefault();
-    let timeSelect = new Date(selectedDate);
-    const inFoExpense = {
-      des: valuaDes,
-      amount: valueAmount,
-      time: timeSelect,
-      title: Category[0],
-      color: Category[1],
-      className: Category[2],
-      idUser: CheckLogin.data._id,
-    };
-    if (regex.test(valueAmount) === false) {
-      setIsShowErr(true);
-    } else if (Category.length === 0) {
-      setIsShowErrSelect(true);
-    } else {
-      setIsShowErr(false);
-      setIsShowErrSelect(false);
-      axios
-        .post(url + "finance/expense", inFoExpense)
-        .then((res) => {
-          setValueAmount("");
-          setValuaDes("");
-          dispatch({
-            type: "DELETE_CATEGORY",
-          });
-
-          return fetchDataBalance();
-        })
-        .then(() => {
-          return fetchDataChartLine();
-        })
-        .then(() => {
-          return fetchDataChartDoughnut();
-        })
-        .then(() => {
-          return fetchDataFetchExpense();
-        })
-        .then(() => {
-          return fetchDataChartBar();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
+  // const handleSubmitExpense = (event) => {
+  //   event.preventDefault();
+  //   let timeSelect = new Date(selectedDate);
+  //   const inFoExpense = {
+  //     time: timeSelect,
+  //     title: Category[0],
+  //     color: Category[1],
+  //     className: Category[2],
+  //   };
+  //   axios
+  //     .post("finance/expense", inFoExpense)
+  //     .then((res) => {
+  //       return fetchDataBalance();
+  //     })
+  // };
 
   const materialTheme = createMuiTheme({
     palette: {
@@ -115,7 +72,6 @@ export default function Expense(props) {
       },
     },
   });
-
   const materialThemeDark = createMuiTheme({
     palette: {
       primary: {
@@ -131,7 +87,6 @@ export default function Expense(props) {
       },
     },
   });
-
   return (
     <div
       className={
@@ -148,22 +103,20 @@ export default function Expense(props) {
           <h3 id={DarkMode ? "dark-header-expense" : null}>Expense</h3>
         </div>
       </div>
-      <form onSubmit={handleSubmitExpense}>
-        {isShowErr ? <span className="err-input">*Only number</span> : null}
+      <form onSubmit={formik.handleSubmit}>
         <div className="expense amount-expense">
           <input
             type="text"
             placeholder="0"
-            value={valueAmount}
-            onChange={hanldeValueAmount}
-            required
+            name="amount"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            onBlur={formik.handleBlur}
             id={DarkMode ? "dark-amount-expense" : null}
           />
           <b>{CheckLogin.data && CheckLogin.data.defaultCurrency}</b>
         </div>
-        {isShowErrSelect ? (
-          <span className="err-input">*Let select one</span>
-        ) : null}
+
         <div className="expense category-expense">
           <i
             className="fas fa-question-circle question-circle"
@@ -171,7 +124,6 @@ export default function Expense(props) {
               return hanleOpenCategory();
             }}
           ></i>
-
           {Category.length ? (
             <div
               className={
@@ -194,8 +146,10 @@ export default function Expense(props) {
           <input
             type="text"
             placeholder="Description"
-            value={valuaDes}
-            onChange={hanldeValueDes}
+            name="des"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+            onBlur={formik.handleBlur}
             id={DarkMode ? "dark-amount-expense" : null}
           />
         </div>
@@ -216,9 +170,9 @@ export default function Expense(props) {
             <Lottie config={{ animationData: animationData, loop: true }} />
           </div>
           <span>
-            Total your wallet now:{" "}
+            Total your wallet now:
             <b>
-              {Balance[2]}
+              {balance}
               {CheckLogin.data && CheckLogin.data.defaultCurrency}
             </b>
           </span>

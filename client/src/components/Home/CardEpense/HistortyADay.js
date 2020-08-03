@@ -5,7 +5,8 @@ export default function HistortyADay(props) {
   const { data, handleSumForExpenseCard } = props;
   const DarkMode = useSelector((state) => state.DarkMode);
   const CheckLogin = useSelector((state) => state.CheckLogin);
-  const sumDataADay = () => {
+
+  useEffect(() => {
     const mapData = data.map((a) => {
       return a.amount;
     });
@@ -13,10 +14,7 @@ export default function HistortyADay(props) {
       return a + b;
     }, 0);
     return handleSumForExpenseCard(sumData);
-  };
-  useEffect(() => {
-    sumDataADay();
-  }, [data]);
+  }, [data, handleSumForExpenseCard]);
   return (
     <div>
       {data.map((d, k) => {

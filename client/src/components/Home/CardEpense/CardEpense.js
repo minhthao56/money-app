@@ -6,7 +6,7 @@ import "./CardEpense.scss";
 import HistortyADay from "./HistortyADay";
 
 export default function CardEpense(props) {
-  const dataExpense = [];
+  const { dataListExpense } = props;
   const DarkMode = useSelector((state) => state.DarkMode);
   const CheckLogin = useSelector((state) => state.CheckLogin);
   const [sum, setSum] = useState(0);
@@ -36,7 +36,7 @@ export default function CardEpense(props) {
             : "main-container-time-expense"
         }
       >
-        {dataExpense.map((data, key) => {
+        {dataListExpense.map((data, key) => {
           return (
             <div className="container-time-expense" key={key}>
               <div className="time-expense">

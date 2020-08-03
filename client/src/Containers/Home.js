@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "antd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 //scss
 import "./Home.scss";
 // components
@@ -16,17 +16,22 @@ import {
 import { ModalCategory } from "../components/Modal";
 // API
 import apiHome from "../services/apiClientAxios/apiHome";
+// helpers
+import { sumExpenseWeek } from "../helpers/sumExpenseWeek";
 
 export default function Home() {
   const DarkMode = useSelector((state) => state.DarkMode);
+  const Category = useSelector((state) => state.Category);
+  const dispatch = useDispatch();
 
   const [expanded, setExpanded] = useState(false);
   const [dataFetchChartLine, setDataFetchChartLine] = useState([]);
   const [dataFetchChartBar, setDataFetchChartBar] = useState([]);
+  const [dataFetchChartDought, setDataFetchChartDought] = useState([]);
+  const [dataFetchBalace, setDataFetchBalance] = useState([]);
+  const [sumWeek, setSumWeek] = useState(0);
+  const [dataListExpense, setDataListExpense] = useState([]);
 
-  const hanleCloseCategory = () => {
-    setExpanded(!expanded);
-  };
   //handle Add Income
   const handleAddIncome = (values, resetForm) => {
     apiHome
@@ -41,13 +46,54 @@ export default function Home() {
       });
   };
 
-  useEffect(() => {
+  // Fecth Data
+  const fetchDataHome = () => {
     apiHome.getDataChartLine().then((res) => {
       setDataFetchChartLine(res);
+      setSumWeek(sumExpenseWeek(res));
     });
     apiHome.getDataChartBar().then((res) => {
       setDataFetchChartBar(res);
     });
+    apiHome.getDataChartDought().then((res) => {
+      setDataFetchChartDought(res);
+    });
+    apiHome.getBalance().then((res) => {
+      setDataFetchBalance(res);
+    });
+    apiHome.getExpense().then((res) => {
+      setDataListExpense(res);
+    });
+  };
+  // hanle Open Category
+  const hanleOpenCategory = () => {
+    setExpanded(!expanded);
+  };
+  const hanleCloseCategory = () => {
+    setExpanded(!expanded);
+  };
+  // handle Submit Expense
+  const handleSubmitExpense = (values, resetForm, selectedDate) => {
+    let timeSelect = new Date(selectedDate);
+    const inFoExpense = {
+      time: timeSelect,
+      title: Category[0],
+      color: Category[1],
+      className: Category[2],
+      amount: values.amount,
+      des: values.des,
+    };
+    apiHome.postExpense(inFoExpense).then((res) => {
+      dispatch({
+        type: "DELETE_CATEGORY",
+      });
+      resetForm({ values: "" });
+      return fetchDataHome();
+    });
+  };
+  // useEffect
+  useEffect(() => {
+    fetchDataHome();
   }, []);
 
   return (
@@ -62,7 +108,7 @@ export default function Home() {
             <CardReport
               titleCard="Total Expense A Day"
               timeCard="Today"
-              moneyExpense="1000"
+              moneyExpense={dataFetchBalace[4]}
               defaultCurrency="$"
             />
           </Col>
@@ -70,7 +116,7 @@ export default function Home() {
             <CardReport
               titleCard="Total Expense A Week"
               timeCard="Week"
-              moneyExpense="1000"
+              moneyExpense={sumWeek}
               defaultCurrency="$"
             />
           </Col>
@@ -78,7 +124,7 @@ export default function Home() {
             <CardReport
               titleCard="Total Expense A Month"
               timeCard="Month"
-              moneyExpense="1000"
+              moneyExpense={dataFetchBalace[3]}
               defaultCurrency="$"
             />
           </Col>
@@ -92,13 +138,18 @@ export default function Home() {
               handleAddIncome={handleAddIncome}
               dataFetchChartLine={dataFetchChartLine}
               dataFetchChartBar={dataFetchChartBar}
+              balance={dataFetchBalace[2]}
             />
-            <ChartDoughnut />
+            <ChartDoughnut dataFetchChartDought={dataFetchChartDought} />
           </Col>
           <Col xs={24} sm={24} md={24} lg={10} xl={10}>
             <Currency />
-            <Expense />
-            <CardEpense />
+            <Expense
+              hanleOpenCategory={hanleOpenCategory}
+              balance={dataFetchBalace[2]}
+              handleSubmitExpense={handleSubmitExpense}
+            />
+            <CardEpense dataListExpense={dataListExpense} />
           </Col>
         </Row>
       </div>

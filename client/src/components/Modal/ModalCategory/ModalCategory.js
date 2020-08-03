@@ -13,10 +13,10 @@ export default function ModalCategory(props) {
   const [isExpend8, setIsExpend8] = useState(false);
   const [isExpend9, setIsExpend9] = useState(false);
 
-  const DarkMode = useSelector((state) => state.DarkMode);
-
   const { hanleCloseCategory } = props;
   const dispatch = useDispatch();
+  const DarkMode = useSelector((state) => state.DarkMode);
+
   const handleSelectCategory = (e) => {
     const value = e.target.value;
     dispatch({

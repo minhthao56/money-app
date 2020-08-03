@@ -19,10 +19,15 @@ export default function LineChart(props) {
   const [isShowChartLine, setIsShowChartLine] = useState(true);
   // Redux
   const CheckLogin = useSelector((state) => state.CheckLogin);
-  const Balance = useSelector((state) => state.Balance);
+
   const DarkMode = useSelector((state) => state.DarkMode);
 
-  const { dataFetchChartLine, dataFetchChartBar, handleAddIncome } = props;
+  const {
+    dataFetchChartLine,
+    dataFetchChartBar,
+    handleAddIncome,
+    balance,
+  } = props;
 
   useEffect(() => {
     setDataChartLine({
@@ -97,9 +102,8 @@ export default function LineChart(props) {
             <div className="money-total">
               <h3 id={DarkMode ? "dark-balance" : null}>
                 {CheckLogin.data && CheckLogin.data.defaultCurrency}
-                {Balance[2]}
+                {balance}
               </h3>
-
               <div
                 onClick={handleShowAddMoney}
                 id={DarkMode ? "dark-fa-plus" : null}

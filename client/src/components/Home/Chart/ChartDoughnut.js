@@ -3,61 +3,42 @@ import { Doughnut } from "react-chartjs-2";
 import { Progress } from "antd";
 import { useSelector } from "react-redux";
 
+//config
+import { backgroundColorChartDought } from "../../../config";
+
 export default function ChartDoughnut(props) {
   const [dataChart, setDataChart] = useState({});
   const [percentAndColorChart, setPercentAndColorChart] = useState([]);
   const Balance = useSelector((state) => state.Balance);
   const DarkMode = useSelector((state) => state.DarkMode);
   const CheckLogin = useSelector((state) => state.CheckLogin);
-  const datatDataDoughnut = [];
-  const backgroundColor = [
-    "#008879",
-    "#00C2AE",
-    "#1BCBB8",
-    "#3FD5C5",
-    "#6BE1D4",
-    "#1038CB",
-    "#2E52D9",
-    "#4F6FE3",
-    "#738CEB",
-    "#9FB2F4",
-    "#F70075",
-    "#FB107F",
-    "#FD3C97",
-    "#FD67AE",
-    "#FE9AC9",
-    "#8E54E8",
-    "#A979F5",
-    "#C4A1FB",
-    "#E3D2FE",
-  ];
+  const { dataFetchChartDought } = props;
+  const backgroundColor = backgroundColorChartDought;
 
-  const dataDoughnut = () => {
-    if (datatDataDoughnut.length !== 0) {
+  useEffect(() => {
+    if (dataFetchChartDought.length) {
       const arr = [];
-      const mapDataPercent = datatDataDoughnut.map((a) => {
+      const mapDataPercent = dataFetchChartDought.map((a) => {
         return a.percentSumAmont;
       });
-      const mapDataTitle = datatDataDoughnut.map((a) => {
+      const mapDataTitle = dataFetchChartDought.map((a) => {
         return a.title;
       });
-
       for (let i = 0; i < mapDataPercent.length; i++) {
         for (let j = 0; j < mapDataPercent.length; j++) {
           if (i === j) {
             const a = {
               strokeColor: backgroundColor[j],
-              percent: datatDataDoughnut[i].percentSumAmont,
-              title: datatDataDoughnut[i].title,
-              className: datatDataDoughnut[i].className,
-              color: datatDataDoughnut[i].color,
+              percent: dataFetchChartDought[i].percentSumAmont,
+              title: dataFetchChartDought[i].title,
+              className: dataFetchChartDought[i].className,
+              color: dataFetchChartDought[i].color,
             };
             arr.push(a);
           }
         }
       }
       setPercentAndColorChart(arr);
-
       setDataChart({
         datasets: [
           {
@@ -68,10 +49,7 @@ export default function ChartDoughnut(props) {
         labels: mapDataTitle,
       });
     }
-  };
-  useEffect(() => {
-    dataDoughnut();
-  }, [datatDataDoughnut]);
+  }, [dataFetchChartDought, backgroundColor]);
   return (
     <div
       className={
@@ -141,7 +119,6 @@ export default function ChartDoughnut(props) {
             })}
           </div>
         </div>
-
         <Doughnut
           data={dataChart}
           options={{
