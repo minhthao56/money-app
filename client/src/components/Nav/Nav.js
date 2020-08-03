@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
-
+//scss
 import "../../assets/weather-icons/css/weather-icons.min.css";
-
 import "./Nav.scss";
+//icon
 import ImageFinance from "../../assets/images/finance.png";
 import LogoForDarkMode from "../../assets/images/time.png";
+//components
 import Dawer from "../Dawer/Dawer";
+// AIP
+import apiWeather from "../../services/apiOtherServies/apiWeather";
+import apiNav from "../../services/apiClientAxios/";
 
 export default function Nav(props) {
-  const CheckLogin = useSelector((state) => state.CheckLogin);
   const dark = JSON.parse(localStorage.getItem("dark"));
-
   const [darkMode, setDarkMode] = useState(dark || false);
   const [dataWeatherCurrent, setDataWeatherCurrent] = useState({});
   const [dataWeather, setDataWeather] = useState({});
-  const Blur = useSelector((state) => state.Blur);
 
   const { isBlur, blurHome } = props;
 
+  const CheckLogin = useSelector((state) => state.CheckLogin);
+  const Blur = useSelector((state) => state.Blur);
   const dispatch = useDispatch();
   let history = useHistory();
 
+  //handle Dark Mode
   const handleDarkMode = (event) => {
     let value = event.target.checked;
     setDarkMode(value);
@@ -33,42 +36,26 @@ export default function Nav(props) {
     });
     localStorage.setItem("dark", JSON.stringify(value));
   };
-  const handleValueDarkModeLocal = () => {
-    dispatch({
-      type: "DARK_MODE",
-      action: dark,
-    });
-  };
-
-  const fetchDataWeather = () => {
-    navigator.geolocation.getCurrentPosition(async function (position) {
-      const longitude = position.coords.longitude;
-      const latitude = position.coords.latitude;
-      const res = await axios.get(
-        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-          latitude +
-          "&lon=" +
-          longitude +
-          "&%20exclude={part}&appid=2a5a281a8096a8e7c005608442b3ac7f"
-      );
-      setDataWeatherCurrent(res.data.current);
-      setDataWeather(res.data.current.weather);
-    });
-  };
-
   //handle SignOut
   const handleSignOut = () => {
     localStorage.removeItem("token");
     history.push("/user/login");
     window.location.reload();
   };
+
   useEffect(() => {
-    handleValueDarkModeLocal();
-    fetchDataWeather();
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const longitude = position.coords.longitude;
+      const latitude = position.coords.latitude;
+      apiWeather.getWeather(latitude, longitude).then((res) => {
+        setDataWeatherCurrent(res.data.current);
+        setDataWeather(res.data.current.weather);
+      });
+    });
   }, []);
+
   const id = dataWeather[0] && dataWeather[0].id;
   // Exchange celsius
-
   const celsiusTemp = dataWeatherCurrent.temp - 273.15;
   const celsiusTempToFixed = celsiusTemp && celsiusTemp.toFixed();
 
@@ -88,7 +75,6 @@ export default function Nav(props) {
             <h1 className={darkMode ? "dart-logo-dark" : null}>money</h1>
           </Link>
         </div>
-
         <div className="container-link-nav">
           <Link className="link-nav" to="/" id="link-nav-preponsive">
             Home
@@ -109,7 +95,6 @@ export default function Nav(props) {
               <span>{CheckLogin.data && CheckLogin.data.name}</span>
             </Link>
             <span onClick={handleSignOut} className="span-sign-out">
-              {" "}
               / Sign Out
             </span>
           </div>
