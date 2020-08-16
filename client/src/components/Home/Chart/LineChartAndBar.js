@@ -19,7 +19,6 @@ export default function LineChart(props) {
   const [isShowChartLine, setIsShowChartLine] = useState(true);
   // Redux
   const CheckLogin = useSelector((state) => state.CheckLogin);
-
   const DarkMode = useSelector((state) => state.DarkMode);
 
   const {
@@ -61,10 +60,9 @@ export default function LineChart(props) {
       ],
     });
   }, [dataFetchChartLine, dataFetchChartBar]);
-
   // Validation
   const ValidationSchema = Yup.object().shape({
-    amount: Yup.number().moreThan(0),
+    amount: Yup.number("Only number").moreThan(0, "More then 0"),
   });
   // hanlde Submit
   const formik = useFormik({
@@ -101,7 +99,7 @@ export default function LineChart(props) {
             <em>Your Balance</em>
             <div className="money-total">
               <h3 id={DarkMode ? "dark-balance" : null}>
-                {CheckLogin.data && CheckLogin.data.defaultCurrency}
+                {CheckLogin.defaultCurrency}
                 {balance}
               </h3>
               <div
@@ -116,6 +114,9 @@ export default function LineChart(props) {
                   isShowAddMoney ? "display-add-money" : "hidden-add-money"
                 }
               >
+                <span className="msg-err">
+                  {formik.touched.amount && formik.errors.amount}
+                </span>
                 <input
                   type="text"
                   placeholder="Money"

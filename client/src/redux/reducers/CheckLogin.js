@@ -1,18 +1,12 @@
 import * as types from "../constans/typeAction";
 
-const initialState = {
-  isAuth: false,
-  data: null,
-};
+const initialState = {};
 
 const myReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.CHECK_LOGGED:
-      const data = action.data;
-      return Object.assign({}, state, {
-        isAuth: true,
-        data: data,
-      });
+      const dataUser = action.action;
+      return Object.assign({}, state, dataUser);
     default:
       return state;
   }

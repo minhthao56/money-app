@@ -11,7 +11,8 @@ import LogoForDarkMode from "../../assets/images/time.png";
 import Dawer from "../Dawer/Dawer";
 // AIP
 import apiWeather from "../../services/apiOtherServies/apiWeather";
-import apiNav from "../../services/apiClientAxios/";
+import apiNav from "../../services/apiClientAxios/apiNav";
+import apiHome from "../../services/apiClientAxios/apiHome";
 
 export default function Nav(props) {
   const dark = JSON.parse(localStorage.getItem("dark"));
@@ -21,8 +22,8 @@ export default function Nav(props) {
 
   const { isBlur, blurHome } = props;
 
-  const CheckLogin = useSelector((state) => state.CheckLogin);
   const Blur = useSelector((state) => state.Blur);
+  const CheckLogin = useSelector((state) => state.CheckLogin);
   const dispatch = useDispatch();
   let history = useHistory();
 
@@ -52,7 +53,19 @@ export default function Nav(props) {
         setDataWeather(res.data.current.weather);
       });
     });
-  }, []);
+    apiNav.getDataUser().then((res) => {
+      dispatch({
+        type: "CHECK_LOGGED",
+        action: res,
+      });
+    });
+    apiHome.getBalance().then((res) => {
+      dispatch({
+        type: "BALANCE",
+        action: res,
+      });
+    });
+  }, [dispatch]);
 
   const id = dataWeather[0] && dataWeather[0].id;
   // Exchange celsius
@@ -85,14 +98,12 @@ export default function Nav(props) {
                 className="avatar-nav"
                 id={darkMode ? "dark-avatar-nav" : null}
                 style={{
-                  backgroundImage: `url(${
-                    CheckLogin.data && CheckLogin.data.avatarUrl
-                  })`,
+                  backgroundImage: `url(${CheckLogin.avatarUrl})`,
                 }}
               ></div>
             </Link>
             <Link className="link-nav" to="/user/profile">
-              <span>{CheckLogin.data && CheckLogin.data.name}</span>
+              <span>{CheckLogin.name}</span>
             </Link>
             <span onClick={handleSignOut} className="span-sign-out">
               / Sign Out

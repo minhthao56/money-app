@@ -1,45 +1,27 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { useSelector } from "react-redux";
 import Moment from "react-moment";
-import axios from "axios";
+
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 export default function IncomeAndHistory(props) {
-  const [valueMoney, setValueMoney] = useState("");
-
-  const CheckLogin = useSelector((state) => state.CheckLogin);
   const Balance = useSelector((state) => state.Balance);
-
-  const { checkLogined } = props;
-
-  const dataIcome = [];
-
-  const url = "https://be-money.herokuapp.com/";
   const DarkMode = useSelector((state) => state.DarkMode);
 
-  // Add money
-  const handlChangeMoney = (event) => {
-    const value = event.target.value;
-    setValueMoney(value);
-  };
-  const handleSubmitMoney = (event) => {
-    event.preventDefault();
-    const inFoMoney = {
-      amount: valueMoney,
-      idUser: CheckLogin.data._id,
-    };
+  const { CheckLogin, handleSubmitAddMoney, dataIcome } = props;
 
-    axios
-      .post(url + "finance/income", inFoMoney)
-      .then((res) => {
-        console.log(res.data);
-        setValueMoney("");
-        return checkLogined();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // Validation
+  const SignUpSchema = Yup.object().shape({
+    amount: Yup.number("Only number").moreThan(0, "More then 0"),
+  });
+  const formik = useFormik({
+    initialValues: {
+      amount: "",
+    },
+    validationSchema: SignUpSchema,
+    onSubmit: (values) => handleSubmitAddMoney(values),
+  });
 
   return (
     <div className="history-profile" id={DarkMode ? "dark-profile" : null}>
@@ -50,15 +32,21 @@ export default function IncomeAndHistory(props) {
 
       <div className="container-card-wallet">
         <div className="card-wallet">
-          <form className="plus-income-wallet" onSubmit={handleSubmitMoney}>
+          <form className="plus-income-wallet" onSubmit={formik.handleSubmit}>
+            <span className="msg-err">
+              {formik.touched.amount && formik.errors.amount}
+            </span>
             <button type="submit">
               <i className="fas fa-plus"></i>
             </button>
             <input
               type="text"
-              placeholder="Add income"
-              value={valueMoney}
-              onChange={handlChangeMoney}
+              placeholder="Money"
+              id="amount"
+              name="amount"
+              value={formik.values.amount}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           </form>
           <div className="money-wallet-balance">
@@ -69,7 +57,7 @@ export default function IncomeAndHistory(props) {
 
               <span>
                 Balance: {Balance[2]}
-                {CheckLogin.data && CheckLogin.data.defaultCurrency}
+                {CheckLogin.defaultCurrency}
               </span>
             </div>
           </div>
@@ -80,7 +68,7 @@ export default function IncomeAndHistory(props) {
             <span>Total income</span>
             <span style={{ marginLeft: "auto" }}>
               {Balance[0]}
-              {CheckLogin.data && CheckLogin.data.defaultCurrency}
+              {CheckLogin.defaultCurrency}
             </span>
           </div>
           <div className="money-wallet">
@@ -90,7 +78,7 @@ export default function IncomeAndHistory(props) {
             <span>Total enpense</span>
             <span style={{ marginLeft: "auto" }}>
               {Balance[1]}
-              {CheckLogin.data && CheckLogin.data.defaultCurrency}
+              {CheckLogin.defaultCurrency}
             </span>
           </div>
         </div>
@@ -106,39 +94,40 @@ export default function IncomeAndHistory(props) {
               : "full-container-history-income"
           }
         >
-          {dataIcome.map((data, key) => {
-            return (
-              <div className="container-history-income" key={key}>
-                <div className="icon-income-wallet">
-                  <svg
-                    width="0.9em"
-                    height="0.9em"
-                    viewBox="0 0 16 16"
-                    className="bi bi-graph-up"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z" />
-                    <path
-                      fillRule="evenodd"
-                      d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"
-                    />
-                    <path
-                      fillRule="evenodd"
-                      d="M10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4h-3.5a.5.5 0 0 1-.5-.5z"
-                    />
-                  </svg>
+          {dataIcome &&
+            dataIcome.map((data, key) => {
+              return (
+                <div className="container-history-income" key={key}>
+                  <div className="icon-income-wallet">
+                    <svg
+                      width="0.9em"
+                      height="0.9em"
+                      viewBox="0 0 16 16"
+                      className="bi bi-graph-up"
+                      fill="currentColor"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z" />
+                      <path
+                        fillRule="evenodd"
+                        d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"
+                      />
+                      <path
+                        fillRule="evenodd"
+                        d="M10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4h-3.5a.5.5 0 0 1-.5-.5z"
+                      />
+                    </svg>
+                  </div>
+                  <span>
+                    <Moment format="DD/MM/YYYY">{data.time}</Moment>
+                  </span>
+                  <span style={{ marginLeft: "auto" }}>
+                    {data.amount}
+                    {CheckLogin.defaultCurrency}
+                  </span>
                 </div>
-                <span>
-                  <Moment format="DD/MM/YYYY">{data.time}</Moment>
-                </span>
-                <span style={{ marginLeft: "auto" }}>
-                  {data.amount}
-                  {CheckLogin.data && CheckLogin.data.defaultCurrency}
-                </span>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     </div>

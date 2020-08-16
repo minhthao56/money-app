@@ -3,10 +3,16 @@ import "./CardTotal.scss";
 import "../../../assets/weather-icons/css/weather-icons.css";
 
 export default function CardRateMonth(props) {
-  const { titleCard, timeCard, moneyExpense, defaultCurrency } = props;
+  const {
+    titleCard,
+    timeCard,
+    moneyExpense,
+    defaultCurrency,
+    cardType,
+  } = props;
 
   return (
-    <div className="container-card-total card-month">
+    <div className={`container-card-total  ${cardType}`}>
       <div className="header-card-total">
         <h3>{titleCard}</h3>
       </div>

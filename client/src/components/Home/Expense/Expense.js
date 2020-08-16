@@ -38,22 +38,6 @@ export default function Expense(props) {
     },
   });
 
-  // const handleSubmitExpense = (event) => {
-  //   event.preventDefault();
-  //   let timeSelect = new Date(selectedDate);
-  //   const inFoExpense = {
-  //     time: timeSelect,
-  //     title: Category[0],
-  //     color: Category[1],
-  //     className: Category[2],
-  //   };
-  //   axios
-  //     .post("finance/expense", inFoExpense)
-  //     .then((res) => {
-  //       return fetchDataBalance();
-  //     })
-  // };
-
   const materialTheme = createMuiTheme({
     palette: {
       primary: {

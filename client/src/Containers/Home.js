@@ -20,15 +20,18 @@ import apiHome from "../services/apiClientAxios/apiHome";
 import { sumExpenseWeek } from "../helpers/sumExpenseWeek";
 
 export default function Home() {
+  //Redux
   const DarkMode = useSelector((state) => state.DarkMode);
   const Category = useSelector((state) => state.Category);
+  const Balance = useSelector((state) => state.Balance);
   const dispatch = useDispatch();
 
+  //State
   const [expanded, setExpanded] = useState(false);
   const [dataFetchChartLine, setDataFetchChartLine] = useState([]);
   const [dataFetchChartBar, setDataFetchChartBar] = useState([]);
   const [dataFetchChartDought, setDataFetchChartDought] = useState([]);
-  const [dataFetchBalace, setDataFetchBalance] = useState([]);
+
   const [sumWeek, setSumWeek] = useState(0);
   const [dataListExpense, setDataListExpense] = useState([]);
 
@@ -59,7 +62,10 @@ export default function Home() {
       setDataFetchChartDought(res);
     });
     apiHome.getBalance().then((res) => {
-      setDataFetchBalance(res);
+      dispatch({
+        type: "BALANCE",
+        action: res,
+      });
     });
     apiHome.getExpense().then((res) => {
       setDataListExpense(res);
@@ -94,6 +100,7 @@ export default function Home() {
   // useEffect
   useEffect(() => {
     fetchDataHome();
+    //eslint-disable-next-line
   }, []);
 
   return (
@@ -108,8 +115,9 @@ export default function Home() {
             <CardReport
               titleCard="Total Expense A Day"
               timeCard="Today"
-              moneyExpense={dataFetchBalace[4]}
+              moneyExpense={Balance[4]}
               defaultCurrency="$"
+              cardType=""
             />
           </Col>
           <Col xs={24} sm={12} md={12} lg={6} xl={6}>
@@ -118,14 +126,16 @@ export default function Home() {
               timeCard="Week"
               moneyExpense={sumWeek}
               defaultCurrency="$"
+              cardType="card-week"
             />
           </Col>
           <Col xs={24} sm={12} md={12} lg={6} xl={6}>
             <CardReport
               titleCard="Total Expense A Month"
               timeCard="Month"
-              moneyExpense={dataFetchBalace[3]}
+              moneyExpense={Balance[3]}
               defaultCurrency="$"
+              cardType="card-month"
             />
           </Col>
           <Col xs={24} sm={12} md={12} lg={6} xl={6}>
@@ -138,7 +148,7 @@ export default function Home() {
               handleAddIncome={handleAddIncome}
               dataFetchChartLine={dataFetchChartLine}
               dataFetchChartBar={dataFetchChartBar}
-              balance={dataFetchBalace[2]}
+              balance={Balance[2]}
             />
             <ChartDoughnut dataFetchChartDought={dataFetchChartDought} />
           </Col>
@@ -146,7 +156,7 @@ export default function Home() {
             <Currency />
             <Expense
               hanleOpenCategory={hanleOpenCategory}
-              balance={dataFetchBalace[2]}
+              balance={Balance[2]}
               handleSubmitExpense={handleSubmitExpense}
             />
             <CardEpense dataListExpense={dataListExpense} />
