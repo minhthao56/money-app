@@ -65,7 +65,11 @@ export default function Nav(props) {
         action: res,
       });
     });
-  }, [dispatch]);
+    dispatch({
+      type: "DARK_MODE",
+      action: darkMode,
+    });
+  }, [dispatch, darkMode]);
 
   const id = dataWeather[0] && dataWeather[0].id;
   // Exchange celsius

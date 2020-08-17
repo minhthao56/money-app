@@ -35,13 +35,16 @@ export default function Profile() {
       .catch((err) => console.log(err));
   };
 
-  const handleSubmitAddMoney = (values) => {
-    apiHome.postAddIncome(values).then((res) => console.log(res));
+  const handleSubmitAddMoney = (values, resetForm) => {
+    apiHome.postAddIncome(values).then((res) => {
+      setDataIcome(res);
+      resetForm({ values: "" });
+    });
   };
 
   useEffect(() => {
     apiProfile.getIcome().then((res) => setDataIcome(res));
-  }, []);
+  }, [dataIcome]);
   return (
     <div
       className={

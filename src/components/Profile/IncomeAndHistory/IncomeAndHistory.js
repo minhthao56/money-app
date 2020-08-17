@@ -20,7 +20,8 @@ export default function IncomeAndHistory(props) {
       amount: "",
     },
     validationSchema: SignUpSchema,
-    onSubmit: (values) => handleSubmitAddMoney(values),
+    onSubmit: (values, { resetForm }) =>
+      handleSubmitAddMoney(values, resetForm),
   });
 
   return (
