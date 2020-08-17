@@ -1,68 +1,63 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Money project
 
-## Available Scripts
+This is a pet project in my course at CodersX. The project requirement is "create a app could manage finance". In my app everyone could manage their finance more effecttively
 
-In the project directory, you can run:
+This github incluce BE and FE (folder client)
 
-### `npm start`
+My account login:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Email: `minhthao5648@gamil.com`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Pass: `12345678`
 
-### `npm test`
+## Deploy
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Link heroku: `https://money-coderx.herokuapp.com/`
 
-### `npm run build`
+## Install
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone
+   `git clone https://github.com/minhthao56/money-app.git`
+2. Install package
+   `npm install`
+3. Run backend (improntant)
+   `https://github.com/minhthao56/be-money`
+   `https://be-money.herokuapp.com/`
+4. Start
+   `npm start`
+5. Fontend on codesanbox (not recommend due to **codesanbox is errored when run package icon weather** which is added. That is why I must deploy into `Heroku`)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This below is link codesandbox if you need them:
+`https://codesandbox.io/s/github/minhthao56/finance-app`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Recommend run FE on `heroku` or local !!!
 
-### `npm run eject`
+## How it works
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. After sign and login on first time. You must choose your sign currency
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![alt](https://res.cloudinary.com/du4arxzzj/image/upload/v1593768533/Screenshot_108_zatstk.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+2. The second, inputing your income you have
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+In home:
+![alt](https://res.cloudinary.com/du4arxzzj/image/upload/v1593767098/Screenshot_104_w1myle.png)
 
-## Learn More
+Or in profile:
+![alt](https://res.cloudinary.com/du4arxzzj/image/upload/v1593767099/Screenshot_105_k1r53y.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Finally, inputing your expense.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Type your money
+![alt](https://res.cloudinary.com/du4arxzzj/image/upload/v1593767302/Screenshot_106_usa7so.png)
 
-### Code Splitting
+Choose a category
+![alt](https://res.cloudinary.com/du4arxzzj/image/upload/v1593767304/Screenshot_107_uq9rgb.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Complete decrption if you want and save them. Your data will be update and display on every chart.
 
-### Analyzing the Bundle Size
+## About me
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+This project is developed by Nguyen Minh Thao. I started CoderX tokyo course on 17/4/2020.
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Email: `minhthao5648@gmail.com`
