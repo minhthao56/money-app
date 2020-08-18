@@ -14,13 +14,12 @@ import "./Expense.scss";
 
 export default function Expense(props) {
   const Category = useSelector((state) => state.Category);
-  const DarkMode = useSelector((state) => state.DarkMode);
   const CheckLogin = useSelector((state) => state.CheckLogin);
 
   const now = new Date();
   const [selectedDate, handleDateChange] = useState(now);
 
-  const { hanleOpenCategory, balance, handleSubmitExpense } = props;
+  const { hanleOpenCategory, balance, handleSubmitExpense, DarkMode } = props;
 
   // Validation
   const SignUpSchema = Yup.object().shape({
@@ -33,9 +32,8 @@ export default function Expense(props) {
       des: "",
     },
     validationSchema: SignUpSchema,
-    onSubmit: (values, { resetForm }) => {
-      return handleSubmitExpense(values, resetForm, selectedDate);
-    },
+    onSubmit: (values, { resetForm }) =>
+      handleSubmitExpense(values, resetForm, selectedDate),
   });
 
   const materialTheme = createMuiTheme({
@@ -93,12 +91,13 @@ export default function Expense(props) {
             type="text"
             placeholder="0"
             name="amount"
+            // id="amount"
             onChange={formik.handleChange}
-            value={formik.values.name}
+            value={formik.values.amount}
             onBlur={formik.handleBlur}
             id={DarkMode ? "dark-amount-expense" : null}
           />
-          <b>{CheckLogin.data && CheckLogin.data.defaultCurrency}</b>
+          <b>{CheckLogin.defaultCurrency}</b>
         </div>
 
         <div className="expense category-expense">
@@ -131,8 +130,9 @@ export default function Expense(props) {
             type="text"
             placeholder="Description"
             name="des"
+            // id="des"
             onChange={formik.handleChange}
-            value={formik.values.name}
+            value={formik.values.des}
             onBlur={formik.handleBlur}
             id={DarkMode ? "dark-amount-expense" : null}
           />
@@ -157,7 +157,7 @@ export default function Expense(props) {
             Total your wallet now:
             <b>
               {balance}
-              {CheckLogin.data && CheckLogin.data.defaultCurrency}
+              {CheckLogin.defaultCurrency}
             </b>
           </span>
         </div>

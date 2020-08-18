@@ -1,20 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 
 export default function HistortyADay(props) {
-  const { data, handleSumForExpenseCard } = props;
-  const DarkMode = useSelector((state) => state.DarkMode);
+  const { data, DarkMode } = props;
   const CheckLogin = useSelector((state) => state.CheckLogin);
-
-  useEffect(() => {
-    const mapData = data.map((a) => {
-      return a.amount;
-    });
-    const sumData = mapData.reduce((a, b) => {
-      return a + b;
-    }, 0);
-    return handleSumForExpenseCard(sumData);
-  }, [data, handleSumForExpenseCard]);
   return (
     <div>
       {data.map((d, k) => {
@@ -34,7 +23,7 @@ export default function HistortyADay(props) {
             </div>
             <span>
               {d.amount}
-              {CheckLogin.data && CheckLogin.data.defaultCurrency}
+              {CheckLogin.defaultCurrency}
             </span>
           </div>
         );

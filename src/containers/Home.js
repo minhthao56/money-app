@@ -81,21 +81,25 @@ export default function Home() {
   // handle Submit Expense
   const handleSubmitExpense = (values, resetForm, selectedDate) => {
     let timeSelect = new Date(selectedDate);
-    const inFoExpense = {
-      time: timeSelect,
-      title: Category[0],
-      color: Category[1],
-      className: Category[2],
-      amount: values.amount,
-      des: values.des,
-    };
-    apiHome.postExpense(inFoExpense).then((res) => {
-      dispatch({
-        type: "DELETE_CATEGORY",
+    if (Category.length) {
+      const inFoExpense = {
+        time: timeSelect,
+        title: Category[0],
+        color: Category[1],
+        className: Category[2],
+        amount: values.amount,
+        des: values.des,
+      };
+      apiHome.postExpense(inFoExpense).then((res) => {
+        dispatch({
+          type: "DELETE_CATEGORY",
+        });
+        resetForm({ values: "" });
+        return fetchDataHome();
       });
-      resetForm({ values: "" });
-      return fetchDataHome();
-    });
+    } else {
+      alert("CATEGORY KÌA BẠN");
+    }
   };
   // useEffect
   useEffect(() => {
@@ -150,7 +154,10 @@ export default function Home() {
               dataFetchChartBar={dataFetchChartBar}
               balance={Balance[2]}
             />
-            <ChartDoughnut dataFetchChartDought={dataFetchChartDought} />
+            <ChartDoughnut
+              dataFetchChartDought={dataFetchChartDought}
+              DarkMode={DarkMode}
+            />
           </Col>
           <Col xs={24} sm={24} md={24} lg={10} xl={10}>
             <Currency />
@@ -158,8 +165,9 @@ export default function Home() {
               hanleOpenCategory={hanleOpenCategory}
               balance={Balance[2]}
               handleSubmitExpense={handleSubmitExpense}
+              DarkMode={DarkMode}
             />
-            <CardEpense dataListExpense={dataListExpense} />
+            <CardEpense dataListExpense={dataListExpense} DarkMode={DarkMode} />
           </Col>
         </Row>
       </div>
