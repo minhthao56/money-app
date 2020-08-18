@@ -14,15 +14,12 @@ import apiWeather from "../../services/apiOtherServies/apiWeather";
 import apiNav from "../../services/apiClientAxios/apiNav";
 import apiHome from "../../services/apiClientAxios/apiHome";
 
-export default function Nav(props) {
+export default function Nav() {
   const dark = JSON.parse(localStorage.getItem("dark"));
   const [darkMode, setDarkMode] = useState(dark || false);
   const [dataWeatherCurrent, setDataWeatherCurrent] = useState({});
   const [dataWeather, setDataWeather] = useState({});
 
-  const { isBlur, blurHome } = props;
-
-  const Blur = useSelector((state) => state.Blur);
   const CheckLogin = useSelector((state) => state.CheckLogin);
   const dispatch = useDispatch();
   let history = useHistory();
@@ -77,10 +74,7 @@ export default function Nav(props) {
   const celsiusTempToFixed = celsiusTemp && celsiusTemp.toFixed();
 
   return (
-    <nav
-      className={darkMode ? "nav dark-nav" : "nav"}
-      id={isBlur || blurHome || Blur ? "blur-nav" : null}
-    >
+    <nav className={darkMode ? "nav dark-nav" : "nav"}>
       <div className="container-nav ">
         <div className="logo-signup logo-nav">
           <Link style={{ display: "flex" }} to="/">
